@@ -1,0 +1,23 @@
+//核酸预约记录表
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"trueName": {}, //姓名
+		"idNo": {}, //证件号
+		"openid": {}, //openId,作为唯一标识符
+		"hsType":{},//核酸检测类型
+		"hsName":{},//核酸检测名称
+		"hsDate":{},//检测时间
+		"hsAddress":{}//检测地点
+	}
+}

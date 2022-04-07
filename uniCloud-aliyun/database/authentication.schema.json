@@ -1,0 +1,22 @@
+//身份信息表
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"openid": {},
+		"trueName": {}, //真实姓名
+		"idNo": {}, //身份证号
+		"gender": {}, //性别
+		"bornTime": {}, //出生日期
+		"address": {} //户籍地址
+	}
+}

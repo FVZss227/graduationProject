@@ -1,0 +1,26 @@
+//疫苗预约记录表
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"trueName": {}, //姓名
+		"idNo": {}, //证件号
+		"openid": {}, //openId,作为唯一标识符
+		"ymName": {}, //疫苗名称
+		"ymType": {}, //疫苗类型
+		"ymNumber": {}, //剂次
+		"injectPlace": {}, //接种位置
+		"created_time": {}, //生产时间
+		"injectDate": {}, //接种时间
+		"injectAddress": {} //接种地点
+	}
+}

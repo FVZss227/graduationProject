@@ -1,0 +1,86 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/home/home",
+			"style": {
+				"navigationBarTitleText": "主页"
+			}
+		},
+		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/reportList/reportList",
+			"style": {
+				"navigationBarTitleText": "检验结果"
+			}
+		},
+		{
+			"path": "pages/hsAppointment/hsAppointment",
+			"style": {
+				"navigationBarTitleText": "核酸预约"
+			}
+		},
+		{
+			"path": "pages/ymAppointment/ymAppointment",
+			"style": {
+				"navigationBarTitleText": "疫苗预约"
+			}
+		},
+		{
+			"path": "pages/ymAppointment/detail",
+			"style": {
+				"navigationBarTitleText": "疫苗预约详情"
+			}
+		},
+		{
+			"path": "pages/personal/personal",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
+		},
+		{
+			"path": "pages/reportList/detail",
+			"style": {
+				"navigationBarTitleText": "检验结果详情"
+			}
+		},
+		{
+			"path": "pages/authentication/authentication",
+			"style": {
+				"navigationBarTitleText": "实名认证"
+			}
+		}, {
+			"path": "pages/ymAppoinmentList/list",
+			"style": {
+				"navigationBarTitleText": "疫苗预约记录"
+			}
+		}, {
+			"path": "pages/hsAppointment/detail",
+			"style": {
+				"navigationBarTitleText": "核酸预约详情"
+			}
+		},
+		{
+			"path": "pages/hsAppoinmentList/list",
+			"style": {
+				"navigationBarTitleText": "核酸预约记录"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#F8F8F8",
+		"backgroundColor": "#F8F8F8"
+	}
+}

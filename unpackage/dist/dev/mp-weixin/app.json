@@ -1,0 +1,26 @@
+{
+    "pages": [
+        "pages/home/home",
+        "pages/login/login",
+        "pages/register/register",
+        "pages/reportList/reportList",
+        "pages/hsAppointment/hsAppointment",
+        "pages/ymAppointment/ymAppointment",
+        "pages/ymAppointment/detail",
+        "pages/personal/personal",
+        "pages/reportList/detail",
+        "pages/authentication/authentication",
+        "pages/ymAppoinmentList/list",
+        "pages/hsAppointment/detail",
+        "pages/hsAppoinmentList/list"
+    ],
+    "subPackages": [],
+    "window": {
+        "navigationBarTextStyle": "black",
+        "navigationBarTitleText": "uni-app",
+        "navigationBarBackgroundColor": "#F8F8F8",
+        "backgroundColor": "#F8F8F8"
+    },
+    "usingComponents": {},
+    "sitemapLocation": "sitemap.json"
+}

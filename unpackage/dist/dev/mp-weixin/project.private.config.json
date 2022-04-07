@@ -1,0 +1,84 @@
+{
+    "setting": {},
+    "condition": {
+        "plugin": {
+            "list": []
+        },
+        "game": {
+            "list": []
+        },
+        "gamePlugin": {
+            "list": []
+        },
+        "miniprogram": {
+            "list": [
+                {
+                    "name": "pages/home/home",
+                    "pathName": "pages/home/home",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/reportList/reportList",
+                    "pathName": "pages/reportList/reportList",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/login/login",
+                    "pathName": "pages/login/login",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/personal/personal",
+                    "pathName": "pages/personal/personal",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "pages/reportList/detail",
+                    "pathName": "pages/reportList/detail",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/register/register",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/authentication/authentication",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/hsAppointment/hsAppointment",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/ymAppointment/ymAppointment",
+                    "query": "",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/ymAppointment/detail",
+                    "query": "type=1",
+                    "scene": null
+                },
+                {
+                    "name": "",
+                    "pathName": "pages/ymAppoinmentList/list",
+                    "query": "",
+                    "scene": null
+                }
+            ]
+        }
+    }
+}
