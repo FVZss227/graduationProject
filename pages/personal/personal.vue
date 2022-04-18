@@ -34,7 +34,6 @@
 				</view>
 				<text class="cuIcon-right"></text>
 			</view>
-
 			<view class="user_item g-flex g-flex-justify" @click="toBusiness('modifyPwsd')">
 				<view class="g-flex g-flex-align-center">
 					<image class="content_img" src="../../static/personal.png" mode=""></image>
@@ -94,7 +93,7 @@
 			console.log(this.loginUserInfo);
 			console.log(this.loginWxUserInfo);
 			// console.log();
-
+			this.loginUserInfo.username=getLoginUserInfo().username=='admin'?'超级管理员':getLoginUserInfo().username
 		},
 		methods: {
 			toBusiness(val) {
@@ -127,8 +126,8 @@
 					success: (res) => {
 						if (res.confirm) {
 							uni.clearStorageSync();
-							uni.navigateBack({
-								delta: 1
+							uni.navigateTo({
+								url:'../home/home'
 							})
 						}
 					}

@@ -6,9 +6,12 @@
 		</view>
 		<view class="cu-form-group margin-top">
 			<view class="title">身份证号:</view>
-			<input placeholder="请输入身份证号" v-model="formData.idNo" />
+			<input placeholder="请输入身份证号:" v-model="formData.idNo" />
 		</view>
-
+<view class="cu-form-group margin-top">
+			<view class="title">联系方式:</view>
+			<input placeholder="请输入联系方式:" v-model="formData.phone" />
+		</view>
 		<view class="cu-form-group margin-top">
 			<view class="title">性别:</view>
 			<radio-group class=" g-flex g-flex-item" name="radio" @change="RadioChange">
@@ -59,7 +62,8 @@
 					idNo: '', //身份证号
 					gender: '', //性别 0:男  1:女
 					bornTime: '', //出生日期
-					address: '', //户籍地址
+					address: '', //户籍地址,
+					phone:"",//联系方式
 
 				},
 				date: '请选择时间'
@@ -90,6 +94,14 @@
 					return
 				}
 				if (!this.formData.idNo) {
+					uni.showModal({
+						title: "提示",
+						content: '请输入身份证号',
+						showCancel: false,
+					});
+					return
+				}
+				if (!this.formData.phone) {
 					uni.showModal({
 						title: "提示",
 						content: '请输入身份证号',

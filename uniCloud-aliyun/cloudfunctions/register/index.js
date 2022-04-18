@@ -1,6 +1,7 @@
 'use strict';
 //加密密码
-const util = require('../../../utils/scert.js')
+// const sha1 = require('./utils/scert.js')
+
 // 获取数据库实例
 const db = uniCloud.database()
 exports.main = async (event, context) => {
@@ -16,7 +17,8 @@ exports.main = async (event, context) => {
 	  //没有数据则新增注册
 	const res = await collection.add({
 				username: event.username,
-				password:util.sha1(event.password) 
+				// password:sha1.sha1(event.password) 
+				password:event.password
 			})
   	return {
   		code: 0,

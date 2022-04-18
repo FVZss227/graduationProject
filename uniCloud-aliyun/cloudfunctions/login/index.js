@@ -1,5 +1,5 @@
 'use strict';
-const util = require('../../../utils/scert.js')
+// const util = require('../../../utils/scert.js')
 const db = uniCloud.database()
 exports.main = async (event, context) => {
   // 获取 user 表的集合对象
@@ -52,7 +52,8 @@ exports.main = async (event, context) => {
 		  await collection.doc(user.data[0]._id).set({
 		  	  		  openid:event.openid,
 					  username: event.username,
-					  password:util.sha1(event.password) 
+					  // password:util.sha1(event.password) 
+					  password:event.password
 		  })
 	  	return {
 	  		code: 0,

@@ -13,7 +13,8 @@
 			"description": "ID，系统自动生成"
 		},
 		"trueName": {}, //姓名
-		"idNo": {}, //证件号
+		"idNo": {}, //证件号，
+		"phone":{},//手机号
 		"openid": {}, //openId,作为唯一标识符
 		"ymName": {}, //疫苗名称
 		"ymType": {}, //疫苗类型
@@ -21,6 +22,8 @@
 		"injectPlace": {}, //接种位置
 		"created_time": {}, //生产时间
 		"injectDate": {}, //接种时间
-		"injectAddress": {} //接种地点
+		"injectAddress": {}, //接种地点
+		"type": {},
+		"status":{}
 	}
 }

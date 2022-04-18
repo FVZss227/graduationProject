@@ -1,0 +1,98 @@
+@charset "UTF-8";
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.order-list .item.data-v-1b39cb21 {
+  margin: 20rpx;
+  border-radius: 10px;
+  background-color: #ffffff;
+}
+.weui-form-preview.data-v-1b39cb21 {
+  position: relative;
+  border-radius: 10px;
+  padding: 10rpx 30rpx;
+  background-color: #ffffff;
+}
+.weui-form-preview__hd.data-v-1b39cb21 {
+  position: relative;
+  padding: 20rpx 0;
+  border-bottom: 1px dashed #c3c3c3;
+}
+.weui-form-preview__hd .weui-form-preview__label.data-v-1b39cb21 {
+  min-width: 200rpx;
+  color: #333;
+  font-size: 32rpx;
+  font-weight: 500;
+  text-align: left;
+}
+.weui-form-preview__hd .label_name.data-v-1b39cb21 {
+  font-weight: bold;
+}
+.weui-form-preview__hd .weui-form-preview__value.data-v-1b39cb21 {
+  font-style: normal;
+  font-size: 28rpx;
+  font-weight: 400;
+}
+.weui-form-preview__bd.data-v-1b39cb21 {
+  padding-top: 12rpx;
+}
+.weui-form-preview__bd .weui-form-preview__item.data-v-1b39cb21 {
+  padding-bottom: 12rpx;
+}
+.weui-form-preview__item.data-v-1b39cb21 {
+  display: flex;
+  -ms-box-pack: justify;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+  box-align: center;
+  align-items: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+}
+.weui-form-preview__label.data-v-1b39cb21 {
+  color: #999999;
+  font-size: 26rpx;
+  font-weight: 400;
+}
+.weui-form-preview__value.data-v-1b39cb21 {
+  color: #333;
+  font-size: 26rpx;
+  font-weight: 400;
+  display: block;
+  overflow: hidden;
+  word-break: normal;
+  word-wrap: break-word;
+}
+.weui-form-preview__ft.data-v-1b39cb21 {
+  padding-bottom: 10rpx;
+}
+.auditBtn.data-v-1b39cb21 {
+  width: 120rpx;
+  height: 40rpx;
+  border-radius: 10rpx;
+  text-align: center;
+  color: #FFFFFF;
+}
+

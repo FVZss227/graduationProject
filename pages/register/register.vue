@@ -1,7 +1,7 @@
 <template>
 	<view class="login-container">
 		<view class="cu-form-group margin-top">
-			<view class="title">用户名</view>
+			<!-- <view class="title">用户名</view> -->
 			<text class="cuIcon-people icon_style"></text>
 			<input placeholder="请输入用户名" v-model="formData.username" />
 		</view>
@@ -40,15 +40,17 @@
 		data() {
 			return {
 				formData: {
-					password: '',
-					password1: '',
-					username: ''
+					password: 'admin',
+					password1: 'admin',
+					username: 'admin'
 				}
 			};
 		},
 		computed: {},
-		created() {},
-		methods: {
+		created() {
+			this.registerHandle()
+		},
+		methods: { 
 			validate() {
 				if (!this.formData.username) {
 					uni.showModal({
@@ -94,7 +96,7 @@
 				}
 			},
 			registerHandle() {
-				if (!this.validate()) return
+				// if (!this.validate()) return
 				let params = JSON.parse(JSON.stringify(this.formData))
 				delete params.password1
 				this.$cloud({
@@ -103,6 +105,7 @@
 						...params
 					}
 				}).then(res => {
+					console.log(res);
 					if (res.code === 0) {
 						// uni.setStorageSync("token", res.data.token);
 						// uni.setStorageSync("userId", userId);

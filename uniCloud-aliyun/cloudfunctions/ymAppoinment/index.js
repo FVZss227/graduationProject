@@ -21,6 +21,7 @@ exports.main = async (event, context) => {
 		const res = await collection.add({
 			trueName: event.trueName,
 			idNo: event.idNo,
+			phone:event.phone,
 			ymType: event.ymType,
 			ymName: event.ymName,
 			openid:event.openid,

@@ -4,13 +4,16 @@
 		<view class="item g-flex g-flex-column g-flex-center" v-for="(item,index) in reportList" :key="index" @click="gotoDetail(item)">
 			<view class="item_content">
 				<view class="item_name">
-					{{item.detectionname}}
+					{{item.hsName}}
 				</view>
 				<view class="item_date">
-					{{item.date}}
+					预约时间：{{item.hsDate}}
+				</view>
+				<view class="item_date" v-if="item.hsTrueDate">
+					检测时间：{{item.hsTrueDate}}
 				</view>
 				<view class="item_img">
-					<image v-if="item.isDetections=='1'" class="img_class1" src="../../static/yifabu.png" mode=""></image>
+					<image v-if="item.status=='1'" class="img_class1" src="../../static/yifabu.png" mode=""></image>
 					<image v-else class="img_class2" src="../../static/weifabu.png" mode=""></image>
 				</view>
 			</view>
@@ -32,7 +35,7 @@
 			return {
 				reportList: [],
 				formData:{
-					id:"",
+					openid:"",
 				}
 			}
 		},
@@ -40,14 +43,13 @@
 
 		},
 		created() {
-			this.formData.id=getOpenId().openid
-			console.log(this.formData.id);
+			this.formData.openid=getOpenId().openid
 			this.getReport()
 		},
 		methods: {
 			getReport() {
 				this.$cloud({
-					name: "reportList",
+					name: "hsAppoinment",
 					data: {
 						...this.formData
 					}
@@ -61,7 +63,7 @@
 				})
 			},
 			gotoDetail(item){
-				if(item.isDetections!=='1'){
+				if(item.status=='0'){
 					uni.showModal({
 						title: '提示',
 						content: '检测后将在4-6小时后处结果，请稍后再试',

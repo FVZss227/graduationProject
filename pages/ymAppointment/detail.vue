@@ -10,7 +10,10 @@
 			<view class="title">证件号:</view>
 			<input :value="ymDetail.idNo" disabled></input>
 		</view>
-
+<view class="cu-form-group">
+			<view class="title">手机号:</view>
+			<input :value="ymDetail.phone" disabled></input>
+		</view>
 		<view class="c-title" style="margin-top: 30upx;">疫苗信息</view>
 		<view class="cu-form-group">
 			<view class="title">疫苗名称(Vaccine):</view>
@@ -75,6 +78,7 @@
 				ymDetail: {
 					trueName:"",
 					idNo:'',
+					phone:"",
 					ymType: '科兴', //疫苗类型
 					ymName: '新冠疫苗(Vero细胞)', //疫苗名称
 					injectPlace: "左臂", //接种位置

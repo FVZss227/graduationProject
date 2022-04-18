@@ -15,13 +15,13 @@ exports.main = async (event, context) => {
 		return {
 			code: 0,
 			data: user.data,
-			
 		}
 	}else{
 		const res = await collection.add({
 			trueName: event.trueName,
 			openid:event.openid,
 			idNo: event.idNo,
+			phone:event.phone,
 			hsType:event.hsType,
 			hsName:event.hsName,
 			hsDate:event.hsDate,

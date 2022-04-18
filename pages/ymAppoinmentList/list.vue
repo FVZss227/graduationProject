@@ -2,13 +2,15 @@
 <template>
 	<view class="order-list">
 		<view class="item" v-for="(item,index) in appointData" :key="index">
-			<view class="weui-form-preview">
+			<view class="weui-form-preview" @click="auditStatus(item)">
 				<view class="weui-form-preview__hd">
 					<view class="weui-form-preview__item">
 						<view class="weui-form-preview__label label_name">
 							{{item.trueName}}
 						</view>
-						<view class="weui-form-preview__value">姓名</view>
+					<view class="auditBtn":style="item.status=='0'?'background-color:#FBC02D' : 'background-color:#26DA6F'">
+						<text>{{item.status=='0'?'未接种':'已接种'}}</text>
+					</view>
 					</view>
 				</view>
 				<view class="weui-form-preview__bd">
@@ -47,6 +49,12 @@
 						<view class="weui-form-preview__value">{{item.injectDate}}</view>
 					</view>
 				</view>
+				<view class="weui-form-preview__bd" v-if="item.status=='1'">
+					<view class="weui-form-preview__item">
+						<view class="weui-form-preview__label">实际接种时间</view>
+						<view class="weui-form-preview__value">{{item.ymTrueDate}}</view>
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
@@ -54,6 +62,7 @@
 <script>
 	import {
 		getOpenId,
+		getLoginUserInfo
 	} from '@/utils/storage.js'
 	export default {
 		name: '',
@@ -62,10 +71,16 @@
 		data() {
 			return {
 				appointData: [],
+				isAdmin:false
 
 			};
 		},
-		created() {
+		onShow() {
+			if(getLoginUserInfo().username=='admin'){
+				this.isAdmin=true
+				this.checkList()
+				return
+			}
 			this.getList()
 		},
 		methods: {
@@ -82,6 +97,33 @@
 						console.log(this.appointData);
 					}
 				})
+			},
+			checkList(){
+				this.$cloud({
+					name: "auditYm",
+					data: {
+						type:'ym'
+					}
+				}).then(res => {
+					console.log(res, '----------------- appointm1111ent---------------');
+					if (res.code == 0) {
+						this.appointData = res.data
+						console.log(this.appointData);
+					}
+				})
+			},
+			auditStatus(val){
+				if(!this.isAdmin) return
+				if(val.status=='1'){
+					uni.showModal({
+						content:'结果已出，无法操作！'
+					})
+					return
+				} 
+				uni.navigateTo({
+					url:'./auditStatus?params='+JSON.stringify(val)
+				})
+				console.log(val._id);
 			}
 		},
 	}
@@ -165,5 +207,12 @@
 
 	.weui-form-preview__ft {
 		padding-bottom: 10rpx;
+	}
+	.auditBtn{
+		width: 120rpx;
+		height: 40rpx;
+		border-radius: 10rpx;
+		text-align: center;
+		color: #FFFFFF;
 	}
 </style>

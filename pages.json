@@ -75,6 +75,18 @@
 			"style": {
 				"navigationBarTitleText": "核酸预约记录"
 			}
+		},
+		{
+			"path": "pages/hsAppoinmentList/auditStatus",
+			"style": {
+				"navigationBarTitleText": "核酸检测状态"
+			}
+		},
+		{
+			"path": "pages/ymAppoinmentList/auditStatus",
+			"style": {
+				"navigationBarTitleText": "疫苗接种状态"
+			}
 		}
 	],
 	"globalStyle": {

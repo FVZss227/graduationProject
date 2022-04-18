@@ -14,49 +14,50 @@
 			</view>
 			<view class="info-detail">
 				<view class="info-name">
-					{{detectionList.username}}
+					{{detectionList.trueName}}
 				</view>
 				<view class="info-item g-flex g-flex-align-center">
 					<view class="item-label">
 						单号：
 					</view>
-					<text class="item-text">{{detectionList.no}}</text>
+					<text class="item-text">{{detectionList._id}}</text>
 				</view>
 				<view class="info-item g-flex g-flex-align-center">
 					<view class="item-label">
-						申请科室：
+						证件号：
 					</view>
-					<text class="item-text">{{detectionList.departMent}}</text>
+					<text class="item-text">{{detectionList.idNo}}</text>
 				</view>
 				<view class="info-item g-flex g-flex-align-center">
 					<view class="item-label">
-						申请医生：
+						检测地点：
 					</view>
-					<text class="item-text">{{detectionList.applyDr}}</text>
+					<text class="item-text">{{detectionList.hsAddress}}</text>
 				</view>
-				<!-- <view class="info-item g-flex g-flex-align-center">
+				
+				<view class="info-item g-flex g-flex-align-center">
 					<view class="item-label">
-						检查日期：
+						检测方式：
 					</view>
-					<text class="item-text">{{item.detectionTime}}</text>
-				</view> -->
+					<text class="item-text">{{detectionList.hsType}}</text>
+				</view>
+				<view class="info-item g-flex g-flex-align-center">
+					<view class="item-label">
+						预约日期：
+					</view>
+					<text class="item-text">{{detectionList.hsDate}}</text>
+				</view>
 				<view class="info-item g-flex g-flex-align-center">
 					<view class="item-label">
 						采样时间：
 					</view>
-					<text class="item-text">{{detectionList.date}}</text>
+					<text class="item-text">{{detectionList.hsTrueDate}}</text>
 				</view>
 				<view class="info-item g-flex g-flex-align-center">
 					<view class="item-label">
 						检测时间：
 					</view>
-					<text class="item-text">{{detectionList.detectionTime}}</text>
-				</view>
-				<view class="info-item g-flex g-flex-align-center">
-					<view class="item-label">
-						报告时间：
-					</view>
-					<text class="item-text">{{detectionList.reportDate}}</text>
+					<text class="item-text">{{detectionList.hsTrueDate}}</text>
 				</view>
 			</view>
 		</view>
@@ -71,17 +72,17 @@
 			</view>
 			<view class="info-check-name g-flex g-flex-align-center g-flex-justify">
 				<view class="">
-					{{detectionList.detectionname}}
+					{{detectionList.hsName}}
 				</view>
 				<view class="">
-					{{detectionList.detectionRes}}
+					{{detectionList.status=='1'?'阴性':''}}
 				</view>
 			</view>
 			<view class="info-check-desc g-flex g-flex-align-center">
 				<view class="desc-label">
 					参考范围：
 				</view>
-				<text>{{detectionList.detectionRes}}</text>
+				<text>{{detectionList.status=='1'?'阴性':''}}</text>
 			</view>
 		</view>
 		<view class="endtips">

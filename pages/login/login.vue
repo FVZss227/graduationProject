@@ -186,9 +186,9 @@
 			},
 			login() {
 				let params = JSON.parse(JSON.stringify(this.formData))
-				if (params.password) {
-					params.password = util.sha1(params.password)
-				}
+				// if (params.password) {
+				// 	params.password = util.sha1(params.password)
+				// }
 				this.$cloud({
 					name: "login",
 					data: {

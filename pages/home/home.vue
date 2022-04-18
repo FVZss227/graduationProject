@@ -14,7 +14,7 @@
 			</view>
 			<view class="home_content">
 				<view class="home_content_card g-flex g-flex-justify">
-					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('vaccine')">
+					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('vaccine')" v-if="!isAdmin">
 						<view class="card_item_content g-flex g-flex-align-center ">
 							<view>
 								<image class="card_item_img" src="../../static/reject.png" mode=""></image>
@@ -25,7 +25,7 @@
 							</view>
 						</view>
 					</view>
-					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('nucleicAcid')">
+					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('nucleicAcid')" v-if="!isAdmin">
 						<view class="card_item_content g-flex g-flex-align-center">
 							<view>
 								<image class="card_item_img" src="../../static/test.png" mode=""></image>
@@ -62,7 +62,7 @@
 					</view>
 				</view>
 				<view class="home_content_card g-flex g-flex-justify">
-					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('report')">
+					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('report')" v-if="!isAdmin">
 						<view class="card_item_content g-flex g-flex-align-center ">
 							<view>
 								<image class="card_item_img" src="../../static/report.png" mode=""></image>
@@ -123,14 +123,19 @@
 						value:'3',
 						src:'../../static/bg3.jpg'
 					}
-				]
+				],
+				isAdmin:false
 			}
 		},
 		computed: {
-
+		
 		},
 		created() {
-
+			if(getLoginUserInfo().username=='admin'){
+				this.isAdmin=true
+			}
+			
+			console.log(getLoginUserInfo().username,'00000000000000000',this.isAdmin);
 		},
 		methods: {
 			intervalChange(e) {
@@ -205,7 +210,7 @@
 				});
 			},
 			goToBusiness(val) {
-				if (!getOpenId().openid) {
+				if (!getOpenId().openid&&getLoginUserInfo().username!='admin') {
 					uni.showModal({
 						title: '提示',
 						content: '登录后可享用所有功能，是否登录？',

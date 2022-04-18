@@ -19,6 +19,7 @@ exports.main = async (event, context) => {
 			gender: event.gender,
 			bornTime: event.bornTime,
 			address: event.address,
+			phone:event.phone
 		})
 		return {
 			code: 0,
