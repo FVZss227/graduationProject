@@ -61,14 +61,18 @@
 		},
 		data() {
 			return {
-				userInfo:{}
+				userInfo:{},
+				appointData:{},
+				one:false,
+				two:false,
+				three:false,
 			}
 		},
 		computed: {
 
 		},
 		created() {
-
+		this.getList()
 		},
 		methods: {
 			//先验证是否实名认证
@@ -93,6 +97,31 @@
 								}
 							});
 							return
+						}	
+						console.log(this.one,this.two,this.three,val);
+						if(this.one&&val=='1'){
+							uni.showModal({
+								title: "提示",
+								content: '您已经预约过第一针，请勿重复预约',
+								showCancel: false,
+							});
+							return
+						}
+						if(this.two&&val=='2'){
+							uni.showModal({
+								title: "提示",
+								content: '您已经预约过第二针，请勿重复预约',
+								showCancel: false,
+							});
+							return
+						}
+						if(this.three&&val=='3'){
+							uni.showModal({
+								title: "提示",
+								content: '您已经预约过第三针（加强针），请勿重复预约',
+								showCancel: false,
+							});
+							return
 						}
 							this.userInfo=res.data[0]
 							this.userInfo.type=val
@@ -100,6 +129,32 @@
 								url:'./detail?userInfo='+JSON.stringify(this.userInfo)
 							})
 					})
+			},
+			
+			getList() {
+				this.$cloud({
+					name: "ymAppoinment",
+					data: {
+						openid: getOpenId().openid
+					}
+				}).then(res => {
+					console.log(res, '----------------- appointment---------------');
+					if (res.code == 0) {
+						this.appointData = res.data
+						for(let i=0;i<this.appointData.length;i++){
+							if(this.appointData[i].ymNumber=='第一针'){
+								this.one=true
+							}
+							if(this.appointData[i].ymNumber=='第二针'){
+								this.two=true
+							}
+							if(this.appointData[i].ymNumber=='第三针（加强针）'){
+								this.three=true
+							}
+						}
+						console.log(this.appointData);
+					}
+				})
 			},
 			// gotoDetail(val) {
 			// 	uni.navigateTo({

@@ -235,8 +235,60 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
 //
-var _default = { name: '', components: {}, data: function data() {return { userInfo: {} };}, computed: {}, created: function created() {}, methods: { //先验证是否实名认证
-    gotoDetail: function gotoDetail(val) {var _this = this;this.$cloud({ name: "isAuth", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {if (res.code == '-1') {uni.showModal({ title: "提示", content: '根据最新安全规定,预约前需实名认证', showCancel: false, success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '../authentication/authentication' });}} });return;}_this.userInfo = res.data[0];_this.userInfo.type = val;uni.navigateTo({ url: './detail?userInfo=' + JSON.stringify(_this.userInfo) });});} // gotoDetail(val) {
+var _default = { name: '', components: {}, data: function data() {return { userInfo: {}, appointData: {}, one: false, two: false, three: false };}, computed: {}, created: function created() {this.getList();}, methods: { //先验证是否实名认证
+    gotoDetail: function gotoDetail(val) {var _this = this;this.$cloud({ name: "isAuth", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {if (res.code == '-1') {uni.showModal({ title: "提示", content: '根据最新安全规定,预约前需实名认证', showCancel: false, success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '../authentication/authentication' });}} });return;}console.log(_this.one, _this.two, _this.three, val);if (_this.one && val == '1') {uni.showModal({ title: "提示", content: '您已经预约过第一针，请勿重复预约', showCancel: false });
+          return;
+        }
+        if (_this.two && val == '2') {
+          uni.showModal({
+            title: "提示",
+            content: '您已经预约过第二针，请勿重复预约',
+            showCancel: false });
+
+          return;
+        }
+        if (_this.three && val == '3') {
+          uni.showModal({
+            title: "提示",
+            content: '您已经预约过第三针（加强针），请勿重复预约',
+            showCancel: false });
+
+          return;
+        }
+        _this.userInfo = res.data[0];
+        _this.userInfo.type = val;
+        uni.navigateTo({
+          url: './detail?userInfo=' + JSON.stringify(_this.userInfo) });
+
+      });
+    },
+
+    getList: function getList() {var _this2 = this;
+      this.$cloud({
+        name: "ymAppoinment",
+        data: {
+          openid: (0, _storage.getOpenId)().openid } }).
+
+      then(function (res) {
+        console.log(res, '----------------- appointment---------------');
+        if (res.code == 0) {
+          _this2.appointData = res.data;
+          for (var i = 0; i < _this2.appointData.length; i++) {
+            if (_this2.appointData[i].ymNumber == '第一针') {
+              _this2.one = true;
+            }
+            if (_this2.appointData[i].ymNumber == '第二针') {
+              _this2.two = true;
+            }
+            if (_this2.appointData[i].ymNumber == '第三针（加强针）') {
+              _this2.three = true;
+            }
+          }
+          console.log(_this2.appointData);
+        }
+      });
+    }
+    // gotoDetail(val) {
     // 	uni.navigateTo({
     // 		url:'./detail?type='+val
     // 	})
