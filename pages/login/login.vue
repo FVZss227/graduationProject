@@ -124,7 +124,6 @@
 									js_code: this.code
 								}
 							}).then(res => {
-								console.log(res, 'wwxxxxxxxxxxxxx');
 								//把取到的openID存到缓存
 								setOpenId(res.data)
 								this.formData.openid = res.data.openid
@@ -154,7 +153,7 @@
 						console.log(res);
 						if (res.errMsg == "login:ok") {
 							this.code = res.code;
-							
+
 						} else {}
 					}
 				})
@@ -202,20 +201,17 @@
 						}
 
 						//登录成功清空表单
-						this.formData.username = ''
-						this.formData.password = ''
-						this.formData.openid = ''
+						for (const key in this.formData) {
+							this.formData[key] = ''
+						}
 						uni.showToast({
 							title: "登录成功！"
 						});
 						setTimeout(() => {
-							
+
 							uni.redirectTo({
 								url: '../home/home'
 							})
-							// uni.showToast({
-							// 	title: "需实名认证后才能进行预约！"
-							// });
 						}, 500)
 					} else {
 						uni.showToast({
@@ -226,7 +222,9 @@
 				});
 			},
 			agreementHandle() {
-
+				uni.navigateTo({
+					url:'../useraAgreement/index'
+				})
 			},
 			//去注册
 			registerHandle() {

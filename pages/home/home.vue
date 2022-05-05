@@ -115,14 +115,14 @@
 						value:'1',
 						src:'../../static/bg.jpg'
 					},
-					{
-						value:'2',
-						src:'../../static/bg2.jpg'
-					},
-					{
-						value:'3',
-						src:'../../static/bg3.jpg'
-					}
+					// {
+					// 	value:'2',
+					// 	src:'../../static/bg2.jpg'
+					// },
+					// {
+					// 	value:'3',
+					// 	src:'../../static/bg3.jpg'
+					// }
 				],
 				isAdmin:false
 			}
@@ -134,8 +134,6 @@
 			if(getLoginUserInfo().username=='admin'){
 				this.isAdmin=true
 			}
-			
-			console.log(getLoginUserInfo().username,'00000000000000000',this.isAdmin);
 		},
 		methods: {
 			intervalChange(e) {
@@ -167,8 +165,6 @@
 								js_code: this.code
 							}
 						}).then(res => {
-							console.log(res, 'wwxxxxxxxxxxxxx');
-							// if(res.)
 							setOpenId(res.data)
 							this.formData.openid = res.data.openid
 							// this.formData.username = '',
@@ -187,7 +183,6 @@
 				}).then(res => {
 					console.log(res, '1111111111');
 					if (res.code === 0) {
-						console.log(this.formData.openid == null);
 						// 			console.log(!this.formData.openid);
 						// 			if (!this.formData.openid) {
 						// 				let params = JSON.parse(JSON.stringify(this.formData))

@@ -25,7 +25,9 @@ exports.main = async (event, context) => {
 			hsType:event.hsType,
 			hsName:event.hsName,
 			hsDate:event.hsDate,
-			hsAddress:event.hsAddress
+			hsAddress:event.hsAddress,
+			type:event.type,
+			status:event.status
 		})
 		return {
 			code: 0,

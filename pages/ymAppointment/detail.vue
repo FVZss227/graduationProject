@@ -10,7 +10,7 @@
 			<view class="title">证件号:</view>
 			<input :value="ymDetail.idNo" disabled></input>
 		</view>
-<view class="cu-form-group">
+		<view class="cu-form-group">
 			<view class="title">手机号:</view>
 			<input :value="ymDetail.phone" disabled></input>
 		</view>
@@ -76,9 +76,9 @@
 		data() {
 			return {
 				ymDetail: {
-					trueName:"",
-					idNo:'',
-					phone:"",
+					trueName: "",
+					idNo: '',
+					phone: "",
 					ymType: '科兴', //疫苗类型
 					ymName: '新冠疫苗(Vero细胞)', //疫苗名称
 					injectPlace: "左臂", //接种位置
@@ -86,9 +86,11 @@
 					created_time: '2022.03.05', //生产时间
 					injectAddress: "", //接种地点
 					injectDate: '', //接种时间
-					openid:''
+					openid: '',
+					type:'ym',
+					status:'0'
 				},
-				
+
 				date: '请选择时间',
 				index: -1,
 				picker: ['东南校区体育馆二楼', '青年公寓大厅', '西北校区实训大楼一楼'],
@@ -96,11 +98,12 @@
 		},
 		onLoad(option) {
 			if (option) {
-				let params=JSON.parse(option.userInfo)
+				let params = JSON.parse(option.userInfo)
 				console.log(params);
-				this.ymDetail.openid=getOpenId().openid
-				this.ymDetail.trueName=params.trueName
-				this.ymDetail.idNo=params.idNo
+				this.ymDetail.openid = getOpenId().openid
+				this.ymDetail.trueName = params.trueName
+				this.ymDetail.idNo = params.idNo
+				this.ymDetail.phone = params.phone
 				this.ymDetail.ymNumber = params.type == '1' ? '第一针' : (params.type == '2' ? '第二针' : '第三针（加强针）')
 			}
 		},
@@ -114,24 +117,24 @@
 				this.index = e.detail.value
 				this.ymDetail.injectAddress = this.picker[this.index]
 			},
-			validate(){
-				if(!this.ymDetail.injectDate){
+			validate() {
+				if (!this.ymDetail.injectDate) {
 					uni.showToast({
 						title: "请选择接种时间！",
-						
+
 					});
 					return
 				}
-				if(!this.ymDetail.injectAddress){
+				if (!this.ymDetail.injectAddress) {
 					uni.showToast({
-						title:'请选择接种地点'
+						title: '请选择接种地点'
 					})
 					return
 				}
 				return true
 			},
 			submitAppoinment() {
-				if(!this.validate()) return
+				if (!this.validate()) return
 				this.$cloud({
 					name: "ymAppoinment",
 					data: {
@@ -139,8 +142,8 @@
 					}
 				}).then(res => {
 					console.log(res, 'wwxxxxxxxxxxxxx');
-					
-					if(res.code==0){
+
+					if (res.code == 0) {
 
 						uni.showModal({
 							title: "提示",
@@ -148,12 +151,12 @@
 							showCancel: false,
 						});
 						uni.navigateBack({
-							delta:1
+							delta: 1
 						})
 						return
 					}
-	
-					
+
+
 
 				})
 			}

@@ -185,6 +185,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 
@@ -198,8 +202,10 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
         hsType: '咽拭子', //检测类型
         hsName: '新冠单采', //疫苗名称,
         hsDate: '', //检测时间
-        hsAddress: '' //检测地点
-      },
+        hsAddress: '', //检测地点,
+        type: 'hs',
+        status: '0' },
+
       date: '请选择时间',
       index: -1,
       picker: ['东南校区体育馆二楼', '青年公寓大厅', '西北校区实训大楼一楼'] };
@@ -212,6 +218,7 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
       this.hsDetail.openid = (0, _storage.getOpenId)().openid;
       this.hsDetail.trueName = params.trueName;
       this.hsDetail.idNo = params.idNo;
+      this.hsDetail.phone = params.phone;
       this.hsDetail.hsName = params.type == 'personal' ? '核酸检测单检' : '核酸检测混检';
     }
   },

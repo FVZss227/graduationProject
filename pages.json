@@ -87,6 +87,12 @@
 			"style": {
 				"navigationBarTitleText": "疫苗接种状态"
 			}
+		},
+		{
+			"path": "pages/useraAgreement/index",
+			"style": {
+				"navigationBarTitleText": "用户协议"
+			}
 		}
 	],
 	"globalStyle": {

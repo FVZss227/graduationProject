@@ -30,6 +30,8 @@ exports.main = async (event, context) => {
 			created_time: event.created_time,
 			injectAddress: event.injectAddress,
 			injectDate: event.injectDate,
+			type:event.type,
+			status:event.status
 		})
 		return {
 			code: 0,

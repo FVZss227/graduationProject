@@ -256,7 +256,6 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
                 js_code: _this.code } }).
 
             then(function (res) {
-              console.log(res, 'wwxxxxxxxxxxxxx');
               //把取到的openID存到缓存
               (0, _storage.setOpenId)(res.data);
               _this.formData.openid = res.data.openid;
@@ -334,9 +333,9 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
           }
 
           //登录成功清空表单
-          _this3.formData.username = '';
-          _this3.formData.password = '';
-          _this3.formData.openid = '';
+          for (var key in _this3.formData) {
+            _this3.formData[key] = '';
+          }
           uni.showToast({
             title: "登录成功！" });
 
@@ -345,9 +344,6 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
             uni.redirectTo({
               url: '../home/home' });
 
-            // uni.showToast({
-            // 	title: "需实名认证后才能进行预约！"
-            // });
           }, 500);
         } else {
           uni.showToast({
@@ -358,6 +354,8 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
       });
     },
     agreementHandle: function agreementHandle() {
+      uni.navigateTo({
+        url: '../useraAgreement/index' });
 
     },
     //去注册

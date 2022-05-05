@@ -5,7 +5,7 @@
 		</view>
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('1')">
 			<view class="item-img">
-				<image class="img-class" src="../../static/report.png" mode=""></image>
+				<image class="img-class" src="../../static/reject.png" mode=""></image>
 			</view>
 			<view class="item-content g-flex g-flex-align-center g-flex-item g-flex-justify">
 				<view class="item-title">
@@ -19,7 +19,7 @@
 		
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('2')">
 			<view class="item-img">
-				<image class="img-class" src="../../static/report.png" mode=""></image>
+				<image class="img-class" src="../../static/reject.png" mode=""></image>
 			</view>
 			<view class="item-content g-flex g-flex-align-center g-flex-item g-flex-justify">
 				<view class="item-title">
@@ -33,7 +33,7 @@
 		
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('3')">
 			<view class="item-img">
-				<image class="img-class" src="../../static/report.png" mode=""></image>
+				<image class="img-class" src="../../static/reject.png" mode=""></image>
 			</view>
 			<view class="item-content g-flex g-flex-align-center g-flex-item g-flex-justify">
 				<view class="item-title">
@@ -79,7 +79,6 @@
 							openid: getOpenId().openid
 						}
 					}).then(res => {
-						console.log(res, 'wwxxxxxxxxxxxxx');
 						if(res.code=='-1'){
 							uni.showModal({
 								title: "提示",

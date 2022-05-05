@@ -10,7 +10,12 @@
         "pages/personal/personal",
         "pages/reportList/detail",
         "pages/authentication/authentication",
-        "pages/ymAppoinmentList/list"
+        "pages/ymAppoinmentList/list",
+        "pages/hsAppointment/detail",
+        "pages/hsAppoinmentList/list",
+        "pages/hsAppoinmentList/auditStatus",
+        "pages/ymAppoinmentList/auditStatus",
+        "pages/useraAgreement/index"
     ],
     "subPackages": [],
     "window": {

@@ -10,6 +10,10 @@
 			<view class="title">证件号:</view>
 			<input :value="hsDetail.idNo" disabled></input>
 		</view>
+<view class="cu-form-group">
+			<view class="title">手机号:</view>
+			<input :value="hsDetail.phone" disabled></input>
+		</view>
 
 		<view class="c-title" style="margin-top: 30upx;">核酸检测信息</view>
 		<view class="cu-form-group">
@@ -66,7 +70,9 @@
 					hsType: '咽拭子', //检测类型
 					hsName: '新冠单采', //疫苗名称,
 					hsDate:'', //检测时间
-					hsAddress:'' //检测地点
+					hsAddress:'' ,//检测地点,
+					type:'hs',
+					status:'0'
 				},
 				date: '请选择时间',
 				index: -1,
@@ -80,6 +86,7 @@
 				this.hsDetail.openid=getOpenId().openid
 				this.hsDetail.trueName=params.trueName
 				this.hsDetail.idNo=params.idNo
+				this.hsDetail.phone=params.phone
 				this.hsDetail.hsName=params.type=='personal'?'核酸检测单检':'核酸检测混检'
 			}
 		},

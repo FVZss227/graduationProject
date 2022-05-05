@@ -218,7 +218,9 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
         created_time: '2022.03.05', //生产时间
         injectAddress: "", //接种地点
         injectDate: '', //接种时间
-        openid: '' },
+        openid: '',
+        type: 'ym',
+        status: '0' },
 
 
       date: '请选择时间',
@@ -233,6 +235,7 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
       this.ymDetail.openid = (0, _storage.getOpenId)().openid;
       this.ymDetail.trueName = params.trueName;
       this.ymDetail.idNo = params.idNo;
+      this.ymDetail.phone = params.phone;
       this.ymDetail.ymNumber = params.type == '1' ? '第一针' : params.type == '2' ? '第二针' : '第三针（加强针）';
     }
   },

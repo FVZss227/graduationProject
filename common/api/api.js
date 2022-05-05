@@ -8,25 +8,6 @@ export default function cloud(option) {
             name,
             data = {}
         } = option
-        // let token = uni.getStorageSync("token");
-        // if (!name) {
-        //     uni.hideLoading()
-        //     throw new Error("name cannot be null");
-        // }
-        // if (name.includes("v2")) {
-        //     if (token) {
-        //         data = {
-        //             ...data,
-        //             ...{
-        //                 token: token
-        //             }
-        //         }
-        //     } else {
-        //         uni.navigateTo({
-        //             url: "/pages/login/index"
-        //         })
-        //     }
-        // }
         uniCloud.callFunction({
             name: option.name,
             data: data

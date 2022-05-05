@@ -198,23 +198,51 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
         phone: "" //联系方式
       },
 
-      date: '请选择时间' };
+      date: '请选择时间',
+      btnTitle: "完善信息" };
 
   },
 
   computed: {},
   created: function created() {
     this.formData.openid = (0, _storage.getOpenId)().openid || '';
+    this.getAuthData();
   },
   methods: {
+    //单选框选中事件
     RadioChange: function RadioChange(e) {
       this.formData.gender = e.detail.value;
     },
+    //日期选择事件
     DateChange: function DateChange(e) {
       this.date = e.detail.value;
       this.formData.bornTime = e.detail.value;
       console.log(this.date);
     },
+
+    //查询实名数据
+    getAuthData: function getAuthData() {var _this = this;
+      this.$cloud({
+        name: "isAuth",
+        data: {
+          openid: this.formData.openid } }).
+
+      then(function (res) {
+        if (res.code == 0) {
+          var data = res.data[0];
+          _this.formData.gender = data.gender;
+          _this.formData.phone = data.phone;
+          _this.formData.trueName = data.trueName;
+          _this.formData.idNo = data.idNo;
+          _this.date = data.bornTime;
+          _this.formData.bornTime = data.bornTime;
+          _this.formData.address = data.address;
+          _this.btnTitle = '修改用户信息';
+        }
+        console.log(res, 'res');
+      });
+    },
+
     //表单校验
     validate: function validate() {
       if (!this.formData.trueName) {
@@ -269,7 +297,8 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
       return true;
     },
 
-    authHandle: function authHandle() {var _this = this;
+    authHandle: function authHandle() {var _this2 = this;
+      //表单验证不通过，抛出异常提示
       if (!this.validate()) return;
       var params = JSON.parse(JSON.stringify(this.formData));
       this.$cloud({
@@ -283,7 +312,7 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
             title: "认证成功！" });
 
           setTimeout(function () {
-            _this.formData = {};
+            _this2.formData = {};
             uni.navigateBack({
               delta: 1 });
 

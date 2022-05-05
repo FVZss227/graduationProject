@@ -8,9 +8,11 @@ exports.main = async (event, context) => {
 	let user = await collection.where({
 		idNo: event.idNo,
 	}).get()
-
+	let openID=await collection.where({
+		openid:event.openid
+	}).get()
 	// affectedDocs 当做找到的个数
-	if (user.affectedDocs < 1) {
+	if (user.affectedDocs < 1&&openID.affectedDocs<1) {
 		//没有数据则新增注册
 		const res = await collection.add({
 			openid: event.openid,
@@ -25,7 +27,24 @@ exports.main = async (event, context) => {
 			code: 0,
 			msg: '实名认证成功'
 		}
-	} else {
+	} else if(openID.affectedDocs>=1){
+		let user = await collection.where({
+				openid:event.openid
+		}).update({
+			openid: event.openid,
+			trueName: event.trueName,
+			idNo: event.idNo,
+			gender: event.gender,
+			bornTime: event.bornTime,
+			address: event.address,
+			phone:event.phone
+		})
+		return {
+			code: 0,
+			msg: '修改信息成功'
+		}
+	}
+	else {
 		return {
 			code: -1,
 			msg: '该证件号已存在!'

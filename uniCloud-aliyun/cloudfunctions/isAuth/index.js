@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
 	let user = await collection.where({
 		openid: event.openid,
 	}).get()
-console.log(user);
+	console.log(user);
 	// affectedDocs 当做找到的个数
 	if (user.affectedDocs < 1) {
 		return {

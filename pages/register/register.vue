@@ -1,18 +1,15 @@
 <template>
 	<view class="login-container">
 		<view class="cu-form-group margin-top">
-			<!-- <view class="title">用户名</view> -->
 			<text class="cuIcon-people icon_style"></text>
 			<input placeholder="请输入用户名" v-model="formData.username" />
 		</view>
 
 		<view class="cu-form-group margin-top">
-			<!-- <view class="title">密码</view> -->
 			<text class="cuIcon-lock icon_style"></text>
 			<input placeholder="请输入密码" password v-model="formData.password" />
 		</view>
 		<view class="cu-form-group margin-top">
-			<!-- <view class="title">确认密码</view> -->
 			<text class="cuIcon-lock icon_style"></text>
 			<input placeholder="请再次输入密码" password v-model="formData.password1" @blur="onInputBlur" />
 		</view>
@@ -40,15 +37,15 @@
 		data() {
 			return {
 				formData: {
-					password: 'admin',
-					password1: 'admin',
-					username: 'admin'
+					password: '',
+					password1: '',
+					username: ''
 				}
 			};
 		},
 		computed: {},
 		created() {
-			this.registerHandle()
+			// this.registerHandle()
 		},
 		methods: { 
 			validate() {
@@ -96,7 +93,7 @@
 				}
 			},
 			registerHandle() {
-				// if (!this.validate()) return
+				if (!this.validate()) return
 				let params = JSON.parse(JSON.stringify(this.formData))
 				delete params.password1
 				this.$cloud({

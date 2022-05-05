@@ -29,15 +29,15 @@
 			</view>
 			<view class="user_item g-flex g-flex-justify" @click="toBusiness('reportList')">
 				<view class="g-flex g-flex-align-center">
-					<image class="content_img" src="../../static/report.png" mode=""></image>
+					<image class="content_img" src="../../static/micro.png" mode=""></image>
 					<view>检测结果查询</view>
 				</view>
 				<text class="cuIcon-right"></text>
 			</view>
-			<view class="user_item g-flex g-flex-justify" @click="toBusiness('modifyPwsd')">
+			<view class="user_item g-flex g-flex-justify" @click="toBusiness('modifyPwsd')" v-if="this.loginUserInfo.username!='超级管理员'">
 				<view class="g-flex g-flex-align-center">
 					<image class="content_img" src="../../static/personal.png" mode=""></image>
-					<view>完善信息</view>
+					<view>修改(完善)实名信息</view>
 				</view>
 				<text class="cuIcon-right"></text>
 			</view>
@@ -48,13 +48,13 @@
 				</view>
 				<text class="cuIcon-right"></text>
 			</view>
-			<view class="user_item g-flex g-flex-justify" @click="toBusiness('version')">
+			<!-- <view class="user_item g-flex g-flex-justify" @click="toBusiness('version')">
 				<view class="g-flex g-flex-align-center">
 					<image class="content_img" src="../../static/about.png" mode=""></image>
 					<view>版本信息</view>
 				</view>
 				<text class="cuIcon-right"></text>
-			</view>
+			</view> -->
 
 		</view>
 		<view class="loing_btn g-flex g-flex-center">
@@ -93,28 +93,39 @@
 			console.log(this.loginUserInfo);
 			console.log(this.loginWxUserInfo);
 			// console.log();
-			this.loginUserInfo.username=getLoginUserInfo().username=='admin'?'超级管理员':getLoginUserInfo().username
+			this.loginUserInfo.username = getLoginUserInfo().username == 'admin' ? '超级管理员' : getLoginUserInfo().username
 		},
 		methods: {
 			toBusiness(val) {
+				console.log(val);
 				if (val == 'hsReport') {
-
+					uni.navigateTo({
+						url: '../hsAppoinmentList/list'
+					})
 					return
 				}
 				if (val == 'ymReport') {
-
+					uni.navigateTo({
+						url: '../ymAppoinmentList/list'
+					})
 					return
 				}
 				if (val == 'reportList') {
-
+					uni.navigateTo({
+						url: '../reportList/reportList'
+					})
 					return
 				}
 				if (val == 'modifyPwsd') {
-
+					uni.navigateTo({
+						url: '../authentication/authentication'
+					})
 					return
 				}
 				if (val == 'about') {
-
+					uni.navigateTo({
+						url: '../useraAgreement/index'
+					})
 					return
 				}
 			},
@@ -127,7 +138,7 @@
 						if (res.confirm) {
 							uni.clearStorageSync();
 							uni.navigateTo({
-								url:'../home/home'
+								url: '../home/home'
 							})
 						}
 					}
@@ -142,32 +153,39 @@
 	page {
 		background-color: #FFFFFF;
 	}
+
 	.container {
 		margin: 40rpx 40rpx;
+
 		.user_info {
 			background-image: url(../../static/bg2.png);
 			height: 300rpx;
 			border-radius: 16rpx;
 			background-color: #FFFFFF;
 			box-shadow: 0 1rpx 16rpx rgba(0, 0, 0, 0.1);
+
 			.info_avatarUrl {
 				width: 150rpx;
 				height: 150rpx;
 				border-radius: 20rpx;
 				margin-bottom: 30rpx;
 			}
+
 			.info_name {
 				font-size: 40rpx;
 			}
 		}
+
 		.user_content {
 			margin-top: 80rpx;
 			height: 800rpx;
+
 			.content_img {
 				margin-right: 20rpx;
 				width: 40rpx;
 				height: 40rpx;
 			}
+
 			.user_item {
 				margin: 0 20rpx;
 				height: 100rpx;
@@ -178,12 +196,15 @@
 					float: right;
 				}
 			}
+
 			.user_item:first-child {
 				border-top: 0.5px solid #787878;
 			}
 		}
+
 		.loing_btn {
 			margin-top: 40rpx;
+
 			.cu-btn {
 				/* border-radius: 25px; */
 				width: 600rpx;

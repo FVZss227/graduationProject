@@ -245,17 +245,17 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
       imgList: [
       {
         value: '1',
-        src: '../../static/bg.jpg' },
+        src: '../../static/bg.jpg' }
 
-      {
-        value: '2',
-        src: '../../static/bg2.jpg' },
-
-      {
-        value: '3',
-        src: '../../static/bg3.jpg' }],
-
-
+      // {
+      // 	value:'2',
+      // 	src:'../../static/bg2.jpg'
+      // },
+      // {
+      // 	value:'3',
+      // 	src:'../../static/bg3.jpg'
+      // }
+      ],
       isAdmin: false };
 
   },
@@ -266,8 +266,6 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
     if ((0, _storage.getLoginUserInfo)().username == 'admin') {
       this.isAdmin = true;
     }
-
-    console.log((0, _storage.getLoginUserInfo)().username, '00000000000000000', this.isAdmin);
   },
   methods: {
     intervalChange: function intervalChange(e) {
@@ -299,8 +297,6 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
               js_code: _this.code } }).
 
           then(function (res) {
-            console.log(res, 'wwxxxxxxxxxxxxx');
-            // if(res.)
             (0, _storage.setOpenId)(res.data);
             _this.formData.openid = res.data.openid;
             // this.formData.username = '',
@@ -319,7 +315,6 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
       then(function (res) {
         console.log(res, '1111111111');
         if (res.code === 0) {
-          console.log(_this2.formData.openid == null);
           // 			console.log(!this.formData.openid);
           // 			if (!this.formData.openid) {
           // 				let params = JSON.parse(JSON.stringify(this.formData))

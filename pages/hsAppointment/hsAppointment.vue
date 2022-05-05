@@ -5,7 +5,7 @@
 		</view>
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('personal')">
 			<view class="item-img">
-				<image class="img-class" src="../../static/report.png" mode=""></image>
+				<image class="img-class" src="../../static/person.png" mode=""></image>
 			</view>
 			<view class="item-content">
 				<view class="item-title">
@@ -16,7 +16,7 @@
 
 				</view>
 				<view class="item-pirce">
-					￥40元
+					￥8元
 				</view>
 			</view>
 
@@ -25,7 +25,7 @@
 
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('group')">
 			<view class="item-img">
-				<image class="img-class" src="../../static/report.png" mode=""></image>
+				<image class="img-class" src="../../static/micro.png" mode=""></image>
 			</view>
 			<view class="item-content">
 				<view class="item-title">
@@ -36,7 +36,7 @@
 
 				</view>
 				<view class="item-pirce">
-					￥10元
+					￥0元
 				</view>
 			</view>
 

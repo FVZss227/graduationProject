@@ -162,9 +162,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 var _default =
 {
   name: '',
@@ -172,15 +169,15 @@ var _default =
   data: function data() {
     return {
       formData: {
-        password: 'admin',
-        password1: 'admin',
-        username: 'admin' } };
+        password: '',
+        password1: '',
+        username: '' } };
 
 
   },
   computed: {},
   created: function created() {
-    this.registerHandle();
+    // this.registerHandle()
   },
   methods: {
     validate: function validate() {
@@ -228,7 +225,7 @@ var _default =
       }
     },
     registerHandle: function registerHandle() {var _this = this;
-      // if (!this.validate()) return
+      if (!this.validate()) return;
       var params = JSON.parse(JSON.stringify(this.formData));
       delete params.password1;
       this.$cloud({
