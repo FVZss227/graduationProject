@@ -175,6 +175,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
@@ -219,20 +231,21 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
 //
-var _default = { name: '', components: {}, data: function data() {return { appointData: [], isAdmin: false };}, onShow: function onShow() {if ((0, _storage.getLoginUserInfo)().username == 'admin') {this.isAdmin = true;this.checkList();return;}this.getList();}, methods: { getList: function getList() {var _this = this;this.$cloud({ name: "hsAppoinment", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {console.log(res, '----------------- appointment---------------');if (res.code == 0) {_this.appointData = res.data;console.log(_this.appointData);}});}, checkList: function checkList() {var _this2 = this;this.$cloud({ name: "auditHs", data: { type: 'hs' } }).then(function (res) {console.log(res, '----------------- appointment111---------------');
-        if (res.code == 0) {
-          _this2.appointData = res.data;
-          console.log(_this2.appointData);
-        }
-      });
-    },
-    auditStatus: function auditStatus(val) {
-      if (!this.isAdmin) return;
-      if (val.status == '1') {
-        uni.showModal({
-          content: '结果已出，无法操作！' });
-
-        return;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: '', components: {}, data: function data() {return { appointData: [], isAdmin: false };}, onShow: function onShow() {if ((0, _storage.getLoginUserInfo)().username == 'admin') {this.isAdmin = true;this.checkList();return;}this.getList();}, methods: { //获取该用户核酸检测预约列表
+    getList: function getList() {var _this = this;this.$cloud({ name: "hsAppoinment", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {if (res.code == 0) {_this.appointData = res.data;console.log(_this.appointData);}});}, //获取表里面所有的预约记录，审核用
+    checkList: function checkList() {var _this2 = this;this.$cloud({ name: "auditHs", data: { type: 'hs' } }).then(function (res) {if (res.code == 0) {_this2.appointData = res.data;console.log(_this2.appointData);}});}, auditStatus: function auditStatus(val) {if (!this.isAdmin) return;if (val.status == '1') {uni.showModal({ content: '结果已出，无法操作！' });return;
       }
       uni.navigateTo({
         url: './auditStatus?params=' + JSON.stringify(val) });

@@ -170,6 +170,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);
 
 
@@ -209,8 +214,6 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
   methods: {
     checkboxChange: function checkboxChange() {
       this.isChecket = !this.isChecket;
-
-
     },
     //表单校验
     validate: function validate() {
@@ -233,7 +236,7 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
       if (!this.isChecket) {
         uni.showModal({
           title: "提示",
-          content: '请仔细阅读并同意协议',
+          content: '请仔细阅读并勾选用户协议',
           showCancel: false });
 
         return;
@@ -243,7 +246,7 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
     //账号密码登录
     loginHandle: function loginHandle() {var _this = this;
       if (!this.validate()) return;
-      //账号密码登录也要获取openID
+      //账号密码登录也要获取openID，与微信登录数据相关联
       uni.login({
         provider: "weixin",
         success: function success(res) {
@@ -265,8 +268,6 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
           } else {}
         } });
 
-
-
     },
     //微信登录按钮
     bindGetUserInfo: function bindGetUserInfo(e) {var _this2 = this;
@@ -285,13 +286,12 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
           console.log(res);
           if (res.errMsg == "login:ok") {
             _this2.code = res.code;
-
           } else {}
         } });
 
       //调用uni.getUserProfile接口获取用户信息（需用户授权）
       uni.getUserProfile({
-        desc: '用于获取用户的信息资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+        desc: '用于获取您的微信相关信息（如微信头像、微信名称）', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
         success: function success(res) {
           console.log(res);
           (0, _storage.setWxLoginUserInfo)(res.userInfo);
@@ -302,7 +302,6 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
               js_code: _this2.code } }).
 
           then(function (res) {
-            console.log(res, 'wwxxxxxxxxxxxxx');
             //把取到的openID存到缓存
             (0, _storage.setOpenId)(res.data);
             _this2.formData.openid = res.data.openid;
@@ -317,21 +316,16 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
     },
     login: function login() {var _this3 = this;
       var params = JSON.parse(JSON.stringify(this.formData));
-      // if (params.password) {
-      // 	params.password = util.sha1(params.password)
-      // }
       this.$cloud({
         name: "login",
         data: _objectSpread({},
         params) }).
 
       then(function (res) {
-        console.log(res, '1111111111');
         if (res.code === 0) {
           if (_this3.formData.openid && _this3.formData.password) {
             (0, _storage.setLoginUserInfo)(params);
           }
-
           //登录成功清空表单
           for (var key in _this3.formData) {
             _this3.formData[key] = '';
@@ -340,7 +334,6 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
             title: "登录成功！" });
 
           setTimeout(function () {
-
             uni.redirectTo({
               url: '../home/home' });
 
@@ -353,6 +346,7 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
         }
       });
     },
+    //用户协议
     agreementHandle: function agreementHandle() {
       uni.navigateTo({
         url: '../useraAgreement/index' });

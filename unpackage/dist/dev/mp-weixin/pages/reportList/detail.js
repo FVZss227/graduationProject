@@ -222,6 +222,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   name: '',
@@ -235,7 +240,6 @@ var _default =
   },
   onLoad: function onLoad(options) {
     console.log(options);
-    // console.log(JSON.parse(options.params));
     this.detectionList = JSON.parse(options.params);
   },
   computed: {},

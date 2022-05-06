@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description: 注册界面
+* @createTime: 2022-05-05 13:18:02
+*/
 <template>
 	<view class="login-container">
 		<view class="cu-form-group margin-top">
@@ -45,9 +50,10 @@
 		},
 		computed: {},
 		created() {
-			// this.registerHandle()
+
 		},
-		methods: { 
+		methods: {
+			//表单验证
 			validate() {
 				if (!this.formData.username) {
 					uni.showModal({
@@ -83,7 +89,8 @@
 				}
 				return true
 			},
-
+			
+			//表单失焦验证两次输入密码是否一致
 			onInputBlur() {
 				if (this.formData.password != this.formData.password1) {
 					uni.showToast({
@@ -92,25 +99,24 @@
 					});
 				}
 			},
+			//注册
 			registerHandle() {
 				if (!this.validate()) return
 				let params = JSON.parse(JSON.stringify(this.formData))
 				delete params.password1
 				this.$cloud({
-			 	name: "register",
+					name: "register",
 					data: {
 						...params
 					}
 				}).then(res => {
 					console.log(res);
 					if (res.code === 0) {
-						// uni.setStorageSync("token", res.data.token);
-						// uni.setStorageSync("userId", userId);
 						uni.showToast({
 							title: "注册成功！"
 						});
 						setTimeout(() => {
-					 	uni.navigateTo({
+							uni.navigateTo({
 								url: '../login/login?loginForm=' + JSON.stringify(this.formData)
 							})
 						}, 500)

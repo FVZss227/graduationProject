@@ -1,6 +1,12 @@
+/**
+ * author: Zhangys
+ * description: 关于作者
+ * @createTime: 2022-05-05 13:11:41
+ */
 <template>
  <view>
-	 关于
+	 The author:张永胜
+	 
  </view>
 </template>
 

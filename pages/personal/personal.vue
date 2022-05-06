@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description: 个人中心界面
+* @createTime: 2022-05-05 13:16:52
+*/
 <template>
 	<view class="container">
 		<view class="user_info g-flex g-flex-column g-flex-center g-flex-align-center">
@@ -12,7 +17,6 @@
 			</view>
 		</view>
 		<view class="user_content">
-
 			<view class="user_item g-flex g-flex-justify" @click="toBusiness('hsReport')">
 				<view class="g-flex g-flex-align-center">
 					<image class="content_img" src="../../static/jilu1.png" mode=""></image>
@@ -34,7 +38,8 @@
 				</view>
 				<text class="cuIcon-right"></text>
 			</view>
-			<view class="user_item g-flex g-flex-justify" @click="toBusiness('modifyPwsd')" v-if="this.loginUserInfo.username!='超级管理员'">
+			<view class="user_item g-flex g-flex-justify" @click="toBusiness('modifyPwsd')"
+				v-if="this.loginUserInfo.username!='超级管理员'">
 				<view class="g-flex g-flex-align-center">
 					<image class="content_img" src="../../static/personal.png" mode=""></image>
 					<view>修改(完善)实名信息</view>
@@ -48,14 +53,6 @@
 				</view>
 				<text class="cuIcon-right"></text>
 			</view>
-			<!-- <view class="user_item g-flex g-flex-justify" @click="toBusiness('version')">
-				<view class="g-flex g-flex-align-center">
-					<image class="content_img" src="../../static/about.png" mode=""></image>
-					<view>版本信息</view>
-				</view>
-				<text class="cuIcon-right"></text>
-			</view> -->
-
 		</view>
 		<view class="loing_btn g-flex g-flex-center">
 			<button class="cu-btn" @click="logOut">
@@ -90,9 +87,6 @@
 		created() {
 			this.loginWxUserInfo = getWxLoginUserInfo('loginWxUserInfo')
 			this.loginUserInfo = getLoginUserInfo('loginUserInfo')
-			console.log(this.loginUserInfo);
-			console.log(this.loginWxUserInfo);
-			// console.log();
 			this.loginUserInfo.username = getLoginUserInfo().username == 'admin' ? '超级管理员' : getLoginUserInfo().username
 		},
 		methods: {
@@ -136,6 +130,7 @@
 					content: '确定要退出吗',
 					success: (res) => {
 						if (res.confirm) {
+							//清空缓存
 							uni.clearStorageSync();
 							uni.navigateTo({
 								url: '../home/home'

@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description: 核酸检测预约产品选择
+* @createTime: 2022-05-05 13:15:51
+*/
 <template>
 	<view class="container">
 		<view class="select-tips">
@@ -13,14 +18,11 @@
 				</view>
 				<view class="item-desc">
 					新型冠状病毒个人核酸检测
-
 				</view>
 				<view class="item-pirce">
-					￥8元
+					￥8元（无需排队）
 				</view>
 			</view>
-
-
 		</view>
 
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('group')">
@@ -29,18 +31,15 @@
 			</view>
 			<view class="item-content">
 				<view class="item-title">
-					新冠核酸检测（10合1混采）
+					新冠核酸检测（10合1混检）
 				</view>
 				<view class="item-desc">
 					新型冠状病毒核酸检测（多人标本混合检测）
-
 				</view>
 				<view class="item-pirce">
 					￥0元
 				</view>
 			</view>
-
-
 		</view>
 
 	</view>
@@ -68,35 +67,34 @@
 		},
 		methods: {
 			//先验证是否实名认证
-			gotoDetail(val){
+			gotoDetail(val) {
 				this.$cloud({
-						name: "isAuth",
-						data: {
-							openid: getOpenId().openid
-						}
-					}).then(res => {
-						console.log(res, 'wwxxxxxxxxxxxxx');
-						if(res.code=='-1'){
-							uni.showModal({
-								title: "提示",
-								content: '根据最新安全规定,预约前需实名认证',
-								showCancel: false,
-								success: (res) => {
-									if(res.confirm){
-										uni.navigateTo({
-											url:'../authentication/authentication'
-										})
-									}
+					name: "isAuth",
+					data: {
+						openid: getOpenId().openid
+					}
+				}).then(res => {
+					if (res.code == '-1') {
+						uni.showModal({
+							title: "提示",
+							content: '根据最新安全规定,预约前需实名认证',
+							showCancel: false,
+							success: (res) => {
+								if (res.confirm) {
+									uni.navigateTo({
+										url: '../authentication/authentication'
+									})
 								}
-							});
-							return
-						}
-							this.userInfo=res.data[0]
-							this.userInfo.type=val
-							uni.navigateTo({
-								url:'./detail?userInfo='+JSON.stringify(this.userInfo)
-							})
+							}
+						});
+						return
+					}
+					this.userInfo = res.data[0]
+					this.userInfo.type = val
+					uni.navigateTo({
+						url: './detail?userInfo=' + JSON.stringify(this.userInfo)
 					})
+				})
 			},
 		},
 	}

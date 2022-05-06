@@ -178,7 +178,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
@@ -226,9 +225,8 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
 //
-//
 var _default = { name: '', components: {}, data: function data() {return {};}, computed: {}, created: function created() {}, methods: { //先验证是否实名认证
-    gotoDetail: function gotoDetail(val) {var _this = this;this.$cloud({ name: "isAuth", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {console.log(res, 'wwxxxxxxxxxxxxx');if (res.code == '-1') {uni.showModal({ title: "提示", content: '根据最新安全规定,预约前需实名认证', showCancel: false, success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '../authentication/authentication' });}} });return;}_this.userInfo = res.data[0];_this.userInfo.type = val;uni.navigateTo({ url: './detail?userInfo=' + JSON.stringify(_this.userInfo) });});
+    gotoDetail: function gotoDetail(val) {var _this = this;this.$cloud({ name: "isAuth", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {if (res.code == '-1') {uni.showModal({ title: "提示", content: '根据最新安全规定,预约前需实名认证', showCancel: false, success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '../authentication/authentication' });}} });return;}_this.userInfo = res.data[0];_this.userInfo.type = val;uni.navigateTo({ url: './detail?userInfo=' + JSON.stringify(_this.userInfo) });});
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

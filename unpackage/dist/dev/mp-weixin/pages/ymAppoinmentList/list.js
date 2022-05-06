@@ -192,6 +192,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
@@ -253,10 +258,13 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
 //
-var _default = { name: '', components: {}, data: function data() {return { appointData: [], isAdmin: false };}, onShow: function onShow() {if ((0, _storage.getLoginUserInfo)().username == 'admin') {this.isAdmin = true;this.checkList();return;}this.getList();}, methods: { getList: function getList() {var _this = this;this.$cloud({ name: "ymAppoinment", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {console.log(res, '----------------- appointment---------------');if (res.code == 0) {_this.appointData = res.data;console.log(_this.appointData);}});}, checkList: function checkList() {var _this2 = this;this.$cloud({ name: "auditYm", data: { type: 'ym' } }).then(function (res) {console.log(res, '----------------- appointm1111ent---------------');if (res.code == 0) {_this2.appointData = res.data;console.log(_this2.appointData);}});}, auditStatus: function auditStatus(val) {if (!this.isAdmin) return;if (val.status == '1') {uni.showModal({ content: '结果已出，无法操作！' });return;}uni.navigateTo({ url: './auditStatus?params=' + JSON.stringify(val) });
-
-      console.log(val._id);
-    } } };exports.default = _default;
+//
+//
+//
+//
+//
+var _default = { name: '', components: {}, data: function data() {return { appointData: [], isAdmin: false };}, onShow: function onShow() {if ((0, _storage.getLoginUserInfo)().username == 'admin') {this.isAdmin = true;this.checkList();return;}this.getList();}, methods: { //获取已预约的列表数据
+    getList: function getList() {var _this = this;this.$cloud({ name: "ymAppoinment", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {if (res.code == 0) {_this.appointData = res.data;console.log(_this.appointData);}});}, checkList: function checkList() {var _this2 = this;this.$cloud({ name: "auditYm", data: { type: 'ym' } }).then(function (res) {if (res.code == 0) {_this2.appointData = res.data;console.log(_this2.appointData);}});}, auditStatus: function auditStatus(val) {if (!this.isAdmin) return;if (val.status == '1') {uni.showModal({ content: '结果已出，无法操作！' });return;}uni.navigateTo({ url: './auditStatus?params=' + JSON.stringify(val) });console.log(val._id);} } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

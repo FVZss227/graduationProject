@@ -162,6 +162,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   name: '',
@@ -177,9 +182,10 @@ var _default =
   },
   computed: {},
   created: function created() {
-    // this.registerHandle()
+
   },
   methods: {
+    //表单验证
     validate: function validate() {
       if (!this.formData.username) {
         uni.showModal({
@@ -216,6 +222,7 @@ var _default =
       return true;
     },
 
+    //表单失焦验证两次输入密码是否一致
     onInputBlur: function onInputBlur() {
       if (this.formData.password != this.formData.password1) {
         uni.showToast({
@@ -224,6 +231,7 @@ var _default =
 
       }
     },
+    //注册
     registerHandle: function registerHandle() {var _this = this;
       if (!this.validate()) return;
       var params = JSON.parse(JSON.stringify(this.formData));
@@ -236,8 +244,6 @@ var _default =
       then(function (res) {
         console.log(res);
         if (res.code === 0) {
-          // uni.setStorageSync("token", res.data.token);
-          // uni.setStorageSync("userId", userId);
           uni.showToast({
             title: "注册成功！" });
 

@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description:小程序主页
+* @createTime: 2022-05-05 13:11:57
+*/
 <template>
 	<view>
 		<view class="home_container">
@@ -10,11 +15,12 @@
 						</view>
 					</swiper-item>
 				</swiper>
-				
+
 			</view>
 			<view class="home_content">
 				<view class="home_content_card g-flex g-flex-justify">
-					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('vaccine')" v-if="!isAdmin">
+					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('vaccine')"
+						v-if="!isAdmin">
 						<view class="card_item_content g-flex g-flex-align-center ">
 							<view>
 								<image class="card_item_img" src="../../static/reject.png" mode=""></image>
@@ -25,7 +31,8 @@
 							</view>
 						</view>
 					</view>
-					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('nucleicAcid')" v-if="!isAdmin">
+					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('nucleicAcid')"
+						v-if="!isAdmin">
 						<view class="card_item_content g-flex g-flex-align-center">
 							<view>
 								<image class="card_item_img" src="../../static/test.png" mode=""></image>
@@ -62,7 +69,8 @@
 					</view>
 				</view>
 				<view class="home_content_card g-flex g-flex-justify">
-					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('report')" v-if="!isAdmin">
+					<view class="content_card_item g-flex g-flex-align-center" @click="goToBusiness('report')"
+						v-if="!isAdmin">
 						<view class="card_item_content g-flex g-flex-align-center ">
 							<view>
 								<image class="card_item_img" src="../../static/report.png" mode=""></image>
@@ -110,108 +118,41 @@
 					openid: ""
 				},
 				code: '',
-				imgList:[
-					{
-						value:'1',
-						src:'../../static/bg.jpg'
+				imgList: [{
+						value: '1',
+						src: '../../static/bg.jpg'
 					},
-					// {
-					// 	value:'2',
-					// 	src:'../../static/bg2.jpg'
-					// },
-					// {
-					// 	value:'3',
-					// 	src:'../../static/bg3.jpg'
-					// }
+					{
+						value:'2',
+						src: '../../static/bg.jpg'
+					},
+					{
+						value:'3',
+						src: '../../static/bg.jpg'
+					}
 				],
-				isAdmin:false
+				isAdmin: false
 			}
 		},
 		computed: {
-		
+
 		},
 		created() {
-			if(getLoginUserInfo().username=='admin'){
-				this.isAdmin=true
+			if (getLoginUserInfo().username == 'admin') {
+				this.isAdmin = true
 			}
 		},
 		methods: {
 			intervalChange(e) {
 				// console.log(e.target);
 			},
-			//微信登录
-			bindGetUserInfo(e) {
-				uni.showLoading({
-					mask: true
-				})
-				uni.login({
-					provider: "weixin",
-					success: (res) => {
-						console.log(res);
-						if (res.errMsg == "login:ok") {
-							this.code = res.code;
-							uni.hideLoading()
-						} else {}
-					}
-				})
-				uni.getUserProfile({
-					desc: '该授权用于获取用户的信息资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-					success: (res) => {
-						console.log(res);
-						setWxLoginUserInfo(res.userInfo)
-						this.$cloud({
-							name: "wxLogin",
-							data: {
-								js_code: this.code
-							}
-						}).then(res => {
-							setOpenId(res.data)
-							this.formData.openid = res.data.openid
-							// this.formData.username = '',
-							// this.formData.password = ''
-							this.login()
-						})
-					}
-				})
-			},
-			login() {
-				this.$cloud({
-					name: "login",
-					data: {
-						...this.formData
-					}
-				}).then(res => {
-					console.log(res, '1111111111');
-					if (res.code === 0) {
-						// 			console.log(!this.formData.openid);
-						// 			if (!this.formData.openid) {
-						// 				let params = JSON.parse(JSON.stringify(this.formData))
-						// 				params.password = util.sha1(params.password)
-						// 				setLoginUserInfo(params)
-						// 			}
-
-						// 			this.formData.username = '',
-						// 				this.formData.password = ''
-						this.code = ''
-						uni.showToast({
-							title: "登陆成功！"
-						});
-					} else {
-						uni.showToast({
-							title: res.msg,
-							icon: "error"
-						});
-					}
-				});
-			},
 			goToBusiness(val) {
-				if (!getOpenId().openid&&getLoginUserInfo().username!='admin') {
+				if (!getOpenId().openid && getLoginUserInfo().username != 'admin') {
 					uni.showModal({
 						title: '提示',
 						content: '登录后可享用所有功能，是否登录？',
 						success: (res) => {
 							if (res.confirm) {
-								// this.bindGetUserInfo()
 								uni.navigateTo({
 									url: "../login/login"
 								})
@@ -219,9 +160,8 @@
 						}
 					})
 					return
-				
 				}
-				// console.log(val);
+				
 				if (val == 'report') {
 					uni.navigateTo({
 						url: '../reportList/reportList'
@@ -240,19 +180,19 @@
 					})
 					return
 				}
-				if(val=='vaccine'){
+				if (val == 'vaccine') {
 					uni.navigateTo({
 						url: "../ymAppointment/ymAppointment"
 					})
 					return
 				}
-				if(val=='vaccineList'){
+				if (val == 'vaccineList') {
 					uni.navigateTo({
 						url: "../ymAppoinmentList/list"
 					})
 					return
 				}
-				if(val=='nucleicAcidList'){
+				if (val == 'nucleicAcidList') {
 					uni.navigateTo({
 						url: "../hsAppoinmentList/list"
 					})
@@ -277,13 +217,14 @@
 		.home_img {
 			width: 100%;
 			height: 400rpx;
-			.swiper{
+
+			.swiper {
 				.home_img_bg {
 					width: 100%;
 					height: 80%;
 				}
 			}
-			
+
 		}
 
 		.home_content {

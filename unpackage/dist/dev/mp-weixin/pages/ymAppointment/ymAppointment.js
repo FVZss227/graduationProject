@@ -183,6 +183,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
@@ -235,14 +240,13 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
 //
+//
+//
+//
+//
+//
 var _default = { name: '', components: {}, data: function data() {return { userInfo: {}, appointData: {}, one: false, two: false, three: false };}, computed: {}, created: function created() {this.getList();}, methods: { //先验证是否实名认证
-    gotoDetail: function gotoDetail(val) {var _this = this;this.$cloud({ name: "isAuth", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {if (res.code == '-1') {uni.showModal({ title: "提示", content: '根据最新安全规定,预约前需实名认证', showCancel: false, success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '../authentication/authentication' });}} });return;}console.log(_this.one, _this.two, _this.three, val);if (_this.one && val == '1') {uni.showModal({ title: "提示", content: '您已经预约过第一针，请勿重复预约', showCancel: false });
-          return;
-        }
-        if (_this.two && val == '2') {
-          uni.showModal({
-            title: "提示",
-            content: '您已经预约过第二针，请勿重复预约',
+    gotoDetail: function gotoDetail(val) {var _this = this;this.$cloud({ name: "isAuth", data: { openid: (0, _storage.getOpenId)().openid } }).then(function (res) {if (res.code == '-1') {uni.showModal({ title: "提示", content: '根据最新安全规定,预约前需实名认证', showCancel: false, success: function success(res) {if (res.confirm) {uni.navigateTo({ url: '../authentication/authentication' });}} });return;}if (_this.one && val == '1') {uni.showModal({ title: "提示", content: '您已经预约过第一针，请勿重复预约', showCancel: false });return;}if (_this.two && val == '2') {uni.showModal({ title: "提示", content: '您已经预约过第二针，请勿重复预约',
             showCancel: false });
 
           return;
@@ -255,6 +259,8 @@ var _default = { name: '', components: {}, data: function data() {return { userI
 
           return;
         }
+
+        //通过校验跳转预约界面
         _this.userInfo = res.data[0];
         _this.userInfo.type = val;
         uni.navigateTo({
@@ -263,6 +269,7 @@ var _default = { name: '', components: {}, data: function data() {return { userI
       });
     },
 
+    //获取该用户的预约列表数据，避免重复预约
     getList: function getList() {var _this2 = this;
       this.$cloud({
         name: "ymAppoinment",
@@ -270,7 +277,6 @@ var _default = { name: '', components: {}, data: function data() {return { userI
           openid: (0, _storage.getOpenId)().openid } }).
 
       then(function (res) {
-        console.log(res, '----------------- appointment---------------');
         if (res.code == 0) {
           _this2.appointData = res.data;
           for (var i = 0; i < _this2.appointData.length; i++) {
@@ -284,16 +290,9 @@ var _default = { name: '', components: {}, data: function data() {return { userI
               _this2.three = true;
             }
           }
-          console.log(_this2.appointData);
         }
       });
-    }
-    // gotoDetail(val) {
-    // 	uni.navigateTo({
-    // 		url:'./detail?type='+val
-    // 	})
-    // },
-  } };exports.default = _default;
+    } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

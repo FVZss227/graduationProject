@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description: 登录功能（微信登录，小程序登录）
+* @createTime: 2022-05-05 13:16:16
+*/
 <template>
 	<view class="login-container">
 		<view class="cu-form-group margin-top">
@@ -77,8 +82,6 @@
 		methods: {
 			checkboxChange() {
 				this.isChecket = !this.isChecket
-
-
 			},
 			//表单校验
 			validate() {
@@ -101,7 +104,7 @@
 				if (!this.isChecket) {
 					uni.showModal({
 						title: "提示",
-						content: '请仔细阅读并同意协议',
+						content: '请仔细阅读并勾选用户协议',
 						showCancel: false,
 					});
 					return
@@ -111,7 +114,7 @@
 			//账号密码登录
 			loginHandle() {
 				if (!this.validate()) return
-				//账号密码登录也要获取openID
+				//账号密码登录也要获取openID，与微信登录数据相关联
 				uni.login({
 					provider: "weixin",
 					success: (res) => {
@@ -133,8 +136,6 @@
 						} else {}
 					}
 				})
-
-
 			},
 			//微信登录按钮
 			bindGetUserInfo(e) {
@@ -153,13 +154,12 @@
 						console.log(res);
 						if (res.errMsg == "login:ok") {
 							this.code = res.code;
-
 						} else {}
 					}
 				})
 				//调用uni.getUserProfile接口获取用户信息（需用户授权）
 				uni.getUserProfile({
-					desc: '用于获取用户的信息资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+					desc: '用于获取您的微信相关信息（如微信头像、微信名称）', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
 					success: (res) => {
 						console.log(res);
 						setWxLoginUserInfo(res.userInfo)
@@ -170,7 +170,6 @@
 								js_code: this.code
 							}
 						}).then(res => {
-							console.log(res, 'wwxxxxxxxxxxxxx');
 							//把取到的openID存到缓存
 							setOpenId(res.data)
 							this.formData.openid = res.data.openid
@@ -185,21 +184,16 @@
 			},
 			login() {
 				let params = JSON.parse(JSON.stringify(this.formData))
-				// if (params.password) {
-				// 	params.password = util.sha1(params.password)
-				// }
 				this.$cloud({
 					name: "login",
 					data: {
 						...params
 					}
 				}).then(res => {
-					console.log(res, '1111111111');
 					if (res.code === 0) {
 						if (this.formData.openid && this.formData.password) {
 							setLoginUserInfo(params)
 						}
-
 						//登录成功清空表单
 						for (const key in this.formData) {
 							this.formData[key] = ''
@@ -208,7 +202,6 @@
 							title: "登录成功！"
 						});
 						setTimeout(() => {
-
 							uni.redirectTo({
 								url: '../home/home'
 							})
@@ -221,9 +214,10 @@
 					}
 				});
 			},
+			//用户协议
 			agreementHandle() {
 				uni.navigateTo({
-					url:'../useraAgreement/index'
+					url: '../useraAgreement/index'
 				})
 			},
 			//去注册

@@ -1,5 +1,9 @@
+/**
+* author: Zhangys
+* description: 管理员审核疫苗预约界面
+* @createTime: 2022-05-05 13:19:50
+*/
 <template>
-
 	<view class="container">
 		<view class="c-title">用户信息</view>
 		<view class="cu-form-group">
@@ -10,7 +14,7 @@
 			<view class="title">证件号:</view>
 			<input :value="ymDetail.idNo" disabled></input>
 		</view>
-<view class="cu-form-group">
+		<view class="cu-form-group">
 			<view class="title">手机号:</view>
 			<input :value="ymDetail.phone" disabled></input>
 		</view>
@@ -45,7 +49,7 @@
 			<view class="title">预约时间:</view>
 			<input placeholder="用户编号" :value="ymDetail.injectDate" disabled></input>
 		</view>
-		
+
 		<view class="c-title" style="margin-top: 30upx;">接种信息</view>
 		<view class="cu-form-group">
 			<view class="title">实际接种时间:</view>
@@ -55,7 +59,7 @@
 				</view>
 			</picker>
 		</view>
-		
+
 		<view class="loing_btn g-flex g-flex-center">
 			<button class="cu-btn" @click="submitAppoinment">
 				<text>
@@ -79,19 +83,19 @@
 		data() {
 			return {
 				ymDetail: {
-					ymTrueDate:""
+					ymTrueDate: ""
 				},
-				
+
 				date: '请选择时间',
-				
+
 			}
 		},
 		onLoad(option) {
 			if (option) {
-				let params=JSON.parse(option.params)
+				let params = JSON.parse(option.params)
 				console.log(params);
-				this.ymDetail=params
-				
+				this.ymDetail = params
+
 			}
 		},
 		methods: {
@@ -100,43 +104,37 @@
 				this.ymDetail.ymTrueDate = e.detail.value
 				console.log(this.date);
 			},
-			
-			validate(){
-				if(!this.ymDetail.ymTrueDate){
-					uni.showToast({
-						title: "请选择实际接种时间！",
-						
+			validate() {
+				if (!this.ymDetail.ymTrueDate) {
+					uni.showModal({
+						title: "提示",
+						content: '请选择实际接种时间',
+						showCancel: false,
 					});
 					return
 				}
 				return true
 			},
 			submitAppoinment() {
-				if(!this.validate()) return
+				if (!this.validate()) return
 				this.$cloud({
 					name: "changeYmStatus",
 					data: {
-						ymTrueDate:this.ymDetail.ymTrueDate,
-						_id:this.ymDetail._id
+						ymTrueDate: this.ymDetail.ymTrueDate,
+						_id: this.ymDetail._id
 					}
 				}).then(res => {
-					console.log(res, 'wwxxxxxxxxxxxxx');
-					
-					if(res.code==0){
-
+					if (res.code == 0) {
 						uni.showModal({
 							title: "提示",
 							content: res.msg,
 							showCancel: false,
 						});
 						uni.navigateBack({
-							delta:1
+							delta: 1
 						})
 						return
 					}
-	
-					
-
 				})
 			}
 		}

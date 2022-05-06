@@ -223,7 +223,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 
 
@@ -231,168 +230,109 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
 
 
 
-{
-  name: '',
-  components: {},
 
-
-  data: function data() {
-    return {
-      formData: {
-        openid: "" },
-
-      code: '',
-      imgList: [
-      {
-        value: '1',
-        src: '../../static/bg.jpg' }
-
-      // {
-      // 	value:'2',
-      // 	src:'../../static/bg2.jpg'
-      // },
-      // {
-      // 	value:'3',
-      // 	src:'../../static/bg3.jpg'
-      // }
-      ],
-      isAdmin: false };
-
-  },
-  computed: {},
-
-
-  created: function created() {
-    if ((0, _storage.getLoginUserInfo)().username == 'admin') {
-      this.isAdmin = true;
-    }
-  },
-  methods: {
-    intervalChange: function intervalChange(e) {
-      // console.log(e.target);
-    },
-    //微信登录
-    bindGetUserInfo: function bindGetUserInfo(e) {var _this = this;
-      uni.showLoading({
-        mask: true });
-
-      uni.login({
-        provider: "weixin",
-        success: function success(res) {
-          console.log(res);
-          if (res.errMsg == "login:ok") {
-            _this.code = res.code;
-            uni.hideLoading();
-          } else {}
-        } });
-
-      uni.getUserProfile({
-        desc: '该授权用于获取用户的信息资料', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
-        success: function success(res) {
-          console.log(res);
-          (0, _storage.setWxLoginUserInfo)(res.userInfo);
-          _this.$cloud({
-            name: "wxLogin",
-            data: {
-              js_code: _this.code } }).
-
-          then(function (res) {
-            (0, _storage.setOpenId)(res.data);
-            _this.formData.openid = res.data.openid;
-            // this.formData.username = '',
-            // this.formData.password = ''
-            _this.login();
-          });
-        } });
-
-    },
-    login: function login() {var _this2 = this;
-      this.$cloud({
-        name: "login",
-        data: _objectSpread({},
-        this.formData) }).
-
-      then(function (res) {
-        console.log(res, '1111111111');
-        if (res.code === 0) {
-          // 			console.log(!this.formData.openid);
-          // 			if (!this.formData.openid) {
-          // 				let params = JSON.parse(JSON.stringify(this.formData))
-          // 				params.password = util.sha1(params.password)
-          // 				setLoginUserInfo(params)
-          // 			}
-
-          // 			this.formData.username = '',
-          // 				this.formData.password = ''
-          _this2.code = '';
-          uni.showToast({
-            title: "登陆成功！" });
-
-        } else {
-          uni.showToast({
-            title: res.msg,
-            icon: "error" });
-
-        }
-      });
-    },
-    goToBusiness: function goToBusiness(val) {
-      if (!(0, _storage.getOpenId)().openid && (0, _storage.getLoginUserInfo)().username != 'admin') {
-        uni.showModal({
-          title: '提示',
-          content: '登录后可享用所有功能，是否登录？',
-          success: function success(res) {
-            if (res.confirm) {
-              // this.bindGetUserInfo()
-              uni.navigateTo({
-                url: "../login/login" });
-
-            }
-          } });
-
-        return;
-
-      }
-      // console.log(val);
-      if (val == 'report') {
-        uni.navigateTo({
-          url: '../reportList/reportList' });
-
-        return;
-      }
-      if (val == 'personal') {
-        uni.navigateTo({
-          url: "../personal/personal" });
-
-        return;
-      }
-      if (val == 'nucleicAcid') {
-        uni.navigateTo({
-          url: "../hsAppointment/hsAppointment" });
-
-        return;
-      }
-      if (val == 'vaccine') {
-        uni.navigateTo({
-          url: "../ymAppointment/ymAppointment" });
-
-        return;
-      }
-      if (val == 'vaccineList') {
-        uni.navigateTo({
-          url: "../ymAppoinmentList/list" });
-
-        return;
-      }
-      if (val == 'nucleicAcidList') {
-        uni.navigateTo({
-          url: "../hsAppoinmentList/list" });
-
-        return;
-      }
-      uni.showModal({
-        title: '提示',
-        content: '开发中，尽请期待！' });
+var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default = { name: '', components: {}, data: function data() {return { formData: { openid: "" }, code: '', imgList: [{ value: '1', src: '../../static/bg.jpg' }, { value: '2', src: '../../static/bg.jpg' }, { value: '3', src: '../../static/bg.jpg' }], isAdmin: false };}, computed: {}, created: function created() {if ((0, _storage.getLoginUserInfo)().username == 'admin') {this.isAdmin = true;}}, methods: { intervalChange: function intervalChange(e) {// console.log(e.target);
+    }, goToBusiness: function goToBusiness(val) {if (!(0, _storage.getOpenId)().openid && (0, _storage.getLoginUserInfo)().username != 'admin') {uni.showModal({ title: '提示', content: '登录后可享用所有功能，是否登录？', success: function success(res) {if (res.confirm) {uni.navigateTo({ url: "../login/login" });}} });return;}if (val == 'report') {uni.navigateTo({ url: '../reportList/reportList' });return;}if (val == 'personal') {uni.navigateTo({ url: "../personal/personal" });return;}if (val == 'nucleicAcid') {uni.navigateTo({ url: "../hsAppointment/hsAppointment" });return;}if (val == 'vaccine') {uni.navigateTo({ url: "../ymAppointment/ymAppointment" });return;}if (val == 'vaccineList') {uni.navigateTo({ url: "../ymAppoinmentList/list" });return;}if (val == 'nucleicAcidList') {uni.navigateTo({ url: "../hsAppoinmentList/list" });return;}uni.showModal({ title: '提示', content: '开发中，尽请期待！' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -197,9 +197,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
@@ -266,12 +263,10 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
 //
-//
-//
-//
-var _default = { name: '', components: {}, data: function data() {return { loginWxUserInfo: {}, loginUserInfo: {} };}, computed: {}, created: function created() {this.loginWxUserInfo = (0, _storage.getWxLoginUserInfo)('loginWxUserInfo');this.loginUserInfo = (0, _storage.getLoginUserInfo)('loginUserInfo');console.log(this.loginUserInfo);console.log(this.loginWxUserInfo); // console.log();
-    this.loginUserInfo.username = (0, _storage.getLoginUserInfo)().username == 'admin' ? '超级管理员' : (0, _storage.getLoginUserInfo)().username;}, methods: { toBusiness: function toBusiness(val) {console.log(val);if (val == 'hsReport') {uni.navigateTo({ url: '../hsAppoinmentList/list' });return;}if (val == 'ymReport') {uni.navigateTo({ url: '../ymAppoinmentList/list' });return;}if (val == 'reportList') {uni.navigateTo({ url: '../reportList/reportList' });return;}if (val == 'modifyPwsd') {uni.navigateTo({ url: '../authentication/authentication' });return;}if (val == 'about') {uni.navigateTo({ url: '../useraAgreement/index' });return;}}, //退出登录
-    logOut: function logOut() {uni.showModal({ title: '提示', content: '确定要退出吗', success: function success(res) {if (res.confirm) {uni.clearStorageSync();uni.navigateTo({ url: '../home/home' });
+var _default = { name: '', components: {}, data: function data() {return { loginWxUserInfo: {}, loginUserInfo: {} };}, computed: {}, created: function created() {this.loginWxUserInfo = (0, _storage.getWxLoginUserInfo)('loginWxUserInfo');this.loginUserInfo = (0, _storage.getLoginUserInfo)('loginUserInfo');this.loginUserInfo.username = (0, _storage.getLoginUserInfo)().username == 'admin' ? '超级管理员' : (0, _storage.getLoginUserInfo)().username;}, methods: { toBusiness: function toBusiness(val) {console.log(val);if (val == 'hsReport') {uni.navigateTo({ url: '../hsAppoinmentList/list' });return;}if (val == 'ymReport') {uni.navigateTo({ url: '../ymAppoinmentList/list' });return;}if (val == 'reportList') {uni.navigateTo({ url: '../reportList/reportList' });return;}if (val == 'modifyPwsd') {uni.navigateTo({ url: '../authentication/authentication' });return;}if (val == 'about') {uni.navigateTo({ url: '../useraAgreement/index' });return;}}, //退出登录
+    logOut: function logOut() {uni.showModal({ title: '提示', content: '确定要退出吗', success: function success(res) {if (res.confirm) {//清空缓存
+            uni.clearStorageSync();uni.navigateTo({ url: '../home/home' });
+
           }
         } });
 

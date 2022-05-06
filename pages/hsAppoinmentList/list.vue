@@ -1,4 +1,8 @@
-<!-- 新办订单列表 -->
+/**
+* author: Zhangys
+* description: 核酸预约记录列表
+* @createTime: 2022-05-05 13:13:31
+*/
 <template>
 	<view class="order-list">
 		<view class="item" v-for="(item,index) in appointData" :key="index">
@@ -8,7 +12,8 @@
 						<view class="weui-form-preview__label label_name">
 							{{item.trueName}}
 						</view>
-						<view class="auditBtn":style="item.status=='0'?'background-color:#FBC02D' : 'background-color:#26DA6F'">
+						<view class="auditBtn"
+							:style="item.status=='0'?'background-color:#FBC02D' : 'background-color:#26DA6F'">
 							<text>{{item.status=='0'?'核酸未做':'核酸已做'}}</text>
 						</view>
 					</view>
@@ -25,7 +30,7 @@
 						<view class="weui-form-preview__value">{{item.hsName}}</view>
 					</view>
 				</view>
-				
+
 				<view class="weui-form-preview__bd">
 					<view class="weui-form-preview__item">
 						<view class="weui-form-preview__label">接种地点</view>
@@ -36,6 +41,13 @@
 					<view class="weui-form-preview__item">
 						<view class="weui-form-preview__label">预约时间</view>
 						<view class="weui-form-preview__value">{{item.hsDate}}</view>
+					</view>
+				</view>
+				
+				<view class="weui-form-preview__bd" v-if="item.hsTrueDate">
+					<view class="weui-form-preview__item">
+						<view class="weui-form-preview__label">实际检测时间</view>
+						<view class="weui-form-preview__value">{{item.hsTrueDate}}</view>
 					</view>
 				</view>
 			</view>
@@ -54,18 +66,19 @@
 		data() {
 			return {
 				appointData: [],
-				isAdmin:false
+				isAdmin: false
 			};
 		},
 		onShow() {
-			if(getLoginUserInfo().username=='admin'){
-				this.isAdmin=true
+			if (getLoginUserInfo().username == 'admin') {
+				this.isAdmin = true
 				this.checkList()
 				return
 			}
 			this.getList()
 		},
 		methods: {
+			//获取该用户核酸检测预约列表
 			getList() {
 				this.$cloud({
 					name: "hsAppoinment",
@@ -73,37 +86,37 @@
 						openid: getOpenId().openid
 					}
 				}).then(res => {
-					console.log(res, '----------------- appointment---------------');
 					if (res.code == 0) {
 						this.appointData = res.data
 						console.log(this.appointData);
 					}
 				})
 			},
-			checkList(){
+			
+			//获取表里面所有的预约记录，审核用
+			checkList() {
 				this.$cloud({
 					name: "auditHs",
 					data: {
-						type:'hs'
+						type: 'hs'
 					}
 				}).then(res => {
-					console.log(res, '----------------- appointment111---------------');
 					if (res.code == 0) {
 						this.appointData = res.data
 						console.log(this.appointData);
 					}
 				})
 			},
-			auditStatus(val){
-				if(!this.isAdmin) return
-				if(val.status=='1'){
+			auditStatus(val) {
+				if (!this.isAdmin) return
+				if (val.status == '1') {
 					uni.showModal({
-						content:'结果已出，无法操作！'
+						content: '结果已出，无法操作！'
 					})
 					return
-				} 
+				}
 				uni.navigateTo({
-					url:'./auditStatus?params='+JSON.stringify(val)
+					url: './auditStatus?params=' + JSON.stringify(val)
 				})
 				console.log(val._id);
 			}
@@ -137,9 +150,11 @@
 			font-weight: 500;
 			text-align: left;
 		}
-		.label_name{
+
+		.label_name {
 			font-weight: bold;
 		}
+
 		.weui-form-preview__value {
 			font-style: normal;
 			font-size: 28rpx;
@@ -190,7 +205,8 @@
 	.weui-form-preview__ft {
 		padding-bottom: 10rpx;
 	}
-	.auditBtn{
+
+	.auditBtn {
 		width: 120rpx;
 		height: 40rpx;
 		border-radius: 10rpx;

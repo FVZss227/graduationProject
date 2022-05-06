@@ -199,6 +199,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 
 
@@ -215,7 +219,7 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
         ymName: '新冠疫苗(Vero细胞)', //疫苗名称
         injectPlace: "左臂", //接种位置
         ymNumber: '', //剂次
-        created_time: '2022.03.05', //生产时间
+        created_time: '2022.05.05', //生产时间
         injectAddress: "", //接种地点
         injectDate: '', //接种时间
         openid: '',
@@ -251,20 +255,24 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
     },
     validate: function validate() {
       if (!this.ymDetail.injectDate) {
-        uni.showToast({
-          title: "请选择接种时间！" });
-
+        uni.showModal({
+          title: "提示",
+          content: '请选择接种时间',
+          showCancel: false });
 
         return;
       }
       if (!this.ymDetail.injectAddress) {
-        uni.showToast({
-          title: '请选择接种地点' });
+        uni.showModal({
+          title: "提示",
+          content: '请选择接种地点',
+          showCancel: false });
 
         return;
       }
       return true;
     },
+    //提交预约
     submitAppoinment: function submitAppoinment() {
       if (!this.validate()) return;
       this.$cloud({
@@ -273,10 +281,7 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);function ownKey
         this.ymDetail) }).
 
       then(function (res) {
-        console.log(res, 'wwxxxxxxxxxxxxx');
-
         if (res.code == 0) {
-
           uni.showModal({
             title: "提示",
             content: res.msg,

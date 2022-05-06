@@ -179,6 +179,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24);
 
 
@@ -220,7 +223,7 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
       console.log(this.date);
     },
 
-    //查询实名数据
+    //查询实名数据，如果查到有数据，回填数据并可更改
     getAuthData: function getAuthData() {var _this = this;
       this.$cloud({
         name: "isAuth",
@@ -301,6 +304,8 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
       //表单验证不通过，抛出异常提示
       if (!this.validate()) return;
       var params = JSON.parse(JSON.stringify(this.formData));
+
+      //调用authData云函数
       this.$cloud({
         name: "authData",
         data: _objectSpread({},
@@ -312,7 +317,10 @@ var _scert = _interopRequireDefault(__webpack_require__(/*! @/utils/scert.js */ 
             title: "认证成功！" });
 
           setTimeout(function () {
-            _this2.formData = {};
+            //清空表单
+            for (var key in _this2.formData) {
+              _this2.formData[key] = '';
+            }
             uni.navigateBack({
               delta: 1 });
 

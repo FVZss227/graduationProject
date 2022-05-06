@@ -1,5 +1,9 @@
+/**
+* author: Zhangys
+* description: 核酸检测预约详情
+* @createTime: 2022-05-05 13:15:26
+*/
 <template>
-
 	<view class="container">
 		<view class="c-title">用户信息</view>
 		<view class="cu-form-group">
@@ -10,7 +14,7 @@
 			<view class="title">证件号:</view>
 			<input :value="hsDetail.idNo" disabled></input>
 		</view>
-<view class="cu-form-group">
+		<view class="cu-form-group">
 			<view class="title">手机号:</view>
 			<input :value="hsDetail.phone" disabled></input>
 		</view>
@@ -66,13 +70,13 @@
 		data() {
 			return {
 				hsDetail: {
-					openid:"",
+					openid: "",
 					hsType: '咽拭子', //检测类型
 					hsName: '新冠单采', //疫苗名称,
-					hsDate:'', //检测时间
-					hsAddress:'' ,//检测地点,
-					type:'hs',
-					status:'0'
+					hsDate: '', //检测时间
+					hsAddress: '', //检测地点,
+					type: 'hs',
+					status: '0'
 				},
 				date: '请选择时间',
 				index: -1,
@@ -81,13 +85,13 @@
 		},
 		onLoad(option) {
 			if (option) {
-				let params=JSON.parse(option.userInfo)
+				let params = JSON.parse(option.userInfo)
 				console.log(params);
-				this.hsDetail.openid=getOpenId().openid
-				this.hsDetail.trueName=params.trueName
-				this.hsDetail.idNo=params.idNo
-				this.hsDetail.phone=params.phone
-				this.hsDetail.hsName=params.type=='personal'?'核酸检测单检':'核酸检测混检'
+				this.hsDetail.openid = getOpenId().openid
+				this.hsDetail.trueName = params.trueName
+				this.hsDetail.idNo = params.idNo
+				this.hsDetail.phone = params.phone
+				this.hsDetail.hsName = params.type == 'personal' ? '核酸检测单检' : '核酸检测混检'
 			}
 		},
 		methods: {
@@ -100,50 +104,50 @@
 				this.index = e.detail.value
 				this.hsDetail.hsAddress = this.picker[this.index]
 			},
-			validate(){
-				if(!this.hsDetail.hsDate){
-					uni.showToast({
-						title: "请选择检测时间！",
+			//表单验证
+			validate() {
+				if (!this.hsDetail.hsDate) {
+					uni.showModal({
+						title: "提示",
+						content: '请选择检测时间',
+						showCancel: false,
 					});
 					return
 				}
-				if(!this.hsDetail.hsAddress){
-					uni.showToast({
-						title:'请选择检测地点'
-					})
+				if (!this.hsDetail.hsAddress) {
+					uni.showModal({
+						title: "提示",
+						content: '请选择检测地点',
+						showCancel: false,
+					});
 					return
 				}
 				return true
 			},
+			
+			//提交申请
 			submitAppoinment() {
-				if(!this.validate()) return
+				if (!this.validate()) return
 				this.$cloud({
 					name: "hsAppoinment",
 					data: {
 						...this.hsDetail
 					}
 				}).then(res => {
-					console.log(res, 'wwxxxxxxxxxxxxx');
-					
-					if(res.code==0){
-			
+					if (res.code == 0) {
 						uni.showModal({
 							title: "提示",
 							content: res.msg,
 							showCancel: false,
 						});
 						uni.navigateBack({
-							delta:1
+							delta: 1
 						})
 						return
 					}
-				
-					
-			
 				})
 			}
 		}
-
 	}
 </script>
 
@@ -164,9 +168,10 @@
 		.cu-form-group {
 			min-height: 86upx;
 		}
+
 		.loing_btn {
 			margin-top: 40rpx;
-		
+
 			.cu-btn {
 				/* border-radius: 25px; */
 				width: 600rpx;
@@ -174,7 +179,7 @@
 				color: #fff;
 				background-color: #59b58d;
 			}
-		
+
 		}
 	}
 </style>

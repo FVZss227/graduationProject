@@ -1,5 +1,9 @@
+/**
+* author: Zhangys
+* description: 疫苗预约详情
+* @createTime: 2022-05-05 13:20:47
+*/
 <template>
-
 	<view class="container">
 		<view class="c-title">用户信息</view>
 		<view class="cu-form-group">
@@ -83,12 +87,12 @@
 					ymName: '新冠疫苗(Vero细胞)', //疫苗名称
 					injectPlace: "左臂", //接种位置
 					ymNumber: '', //剂次
-					created_time: '2022.03.05', //生产时间
+					created_time: '2022.05.05', //生产时间
 					injectAddress: "", //接种地点
 					injectDate: '', //接种时间
 					openid: '',
-					type:'ym',
-					status:'0'
+					type: 'ym',
+					status: '0'
 				},
 
 				date: '请选择时间',
@@ -119,20 +123,24 @@
 			},
 			validate() {
 				if (!this.ymDetail.injectDate) {
-					uni.showToast({
-						title: "请选择接种时间！",
-
+					uni.showModal({
+						title: "提示",
+						content: '请选择接种时间',
+						showCancel: false,
 					});
 					return
 				}
 				if (!this.ymDetail.injectAddress) {
-					uni.showToast({
-						title: '请选择接种地点'
-					})
+					uni.showModal({
+						title: "提示",
+						content: '请选择接种地点',
+						showCancel: false,
+					});
 					return
 				}
 				return true
 			},
+			//提交预约
 			submitAppoinment() {
 				if (!this.validate()) return
 				this.$cloud({
@@ -141,10 +149,7 @@
 						...this.ymDetail
 					}
 				}).then(res => {
-					console.log(res, 'wwxxxxxxxxxxxxx');
-
 					if (res.code == 0) {
-
 						uni.showModal({
 							title: "提示",
 							content: res.msg,

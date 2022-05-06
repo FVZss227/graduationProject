@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description: 疫苗预约产品选择
+* @createTime: 2022-05-05 13:20:59
+*/
 <template>
 	<view class="container">
 		<view class="select-tips">
@@ -16,7 +21,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('2')">
 			<view class="item-img">
 				<image class="img-class" src="../../static/reject.png" mode=""></image>
@@ -30,7 +35,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="item g-flex g-flex-align-center g-flex-item" @click="gotoDetail('3')">
 			<view class="item-img">
 				<image class="img-class" src="../../static/reject.png" mode=""></image>
@@ -45,7 +50,7 @@
 			</view>
 		</view>
 
-		
+
 
 	</view>
 </template>
@@ -61,76 +66,78 @@
 		},
 		data() {
 			return {
-				userInfo:{},
-				appointData:{},
-				one:false,
-				two:false,
-				three:false,
+				userInfo: {},
+				appointData: {},
+				one: false,
+				two: false,
+				three: false,
 			}
 		},
 		computed: {
 
 		},
 		created() {
-		this.getList()
+			this.getList()
 		},
 		methods: {
 			//先验证是否实名认证
-			gotoDetail(val){
+			gotoDetail(val) {
 				this.$cloud({
-						name: "isAuth",
-						data: {
-							openid: getOpenId().openid
-						}
-					}).then(res => {
-						if(res.code=='-1'){
-							uni.showModal({
-								title: "提示",
-								content: '根据最新安全规定,预约前需实名认证',
-								showCancel: false,
-								success: (res) => {
-									if(res.confirm){
-										uni.navigateTo({
-											url:'../authentication/authentication'
-										})
-									}
+					name: "isAuth",
+					data: {
+						openid: getOpenId().openid
+					}
+				}).then(res => {
+					if (res.code == '-1') {
+						uni.showModal({
+							title: "提示",
+							content: '根据最新安全规定,预约前需实名认证',
+							showCancel: false,
+							success: (res) => {
+								if (res.confirm) {
+									uni.navigateTo({
+										url: '../authentication/authentication'
+									})
 								}
-							});
-							return
-						}	
-						console.log(this.one,this.two,this.three,val);
-						if(this.one&&val=='1'){
-							uni.showModal({
-								title: "提示",
-								content: '您已经预约过第一针，请勿重复预约',
-								showCancel: false,
-							});
-							return
-						}
-						if(this.two&&val=='2'){
-							uni.showModal({
-								title: "提示",
-								content: '您已经预约过第二针，请勿重复预约',
-								showCancel: false,
-							});
-							return
-						}
-						if(this.three&&val=='3'){
-							uni.showModal({
-								title: "提示",
-								content: '您已经预约过第三针（加强针），请勿重复预约',
-								showCancel: false,
-							});
-							return
-						}
-							this.userInfo=res.data[0]
-							this.userInfo.type=val
-							uni.navigateTo({
-								url:'./detail?userInfo='+JSON.stringify(this.userInfo)
-							})
+							}
+						});
+						return
+					}
+					if (this.one && val == '1') {
+						uni.showModal({
+							title: "提示",
+							content: '您已经预约过第一针，请勿重复预约',
+							showCancel: false,
+						});
+						return
+					}
+					if (this.two && val == '2') {
+						uni.showModal({
+							title: "提示",
+							content: '您已经预约过第二针，请勿重复预约',
+							showCancel: false,
+						});
+						return
+					}
+					if (this.three && val == '3') {
+						uni.showModal({
+							title: "提示",
+							content: '您已经预约过第三针（加强针），请勿重复预约',
+							showCancel: false,
+						});
+						return
+					}
+					
+					//通过校验跳转预约界面
+					this.userInfo = res.data[0]
+					this.userInfo.type = val
+					uni.navigateTo({
+						url: './detail?userInfo=' + JSON.stringify(this.userInfo)
 					})
+				})
 			},
-			
+
+			//获取该用户的预约列表数据，避免重复预约
 			getList() {
 				this.$cloud({
 					name: "ymAppoinment",
@@ -138,29 +145,22 @@
 						openid: getOpenId().openid
 					}
 				}).then(res => {
-					console.log(res, '----------------- appointment---------------');
 					if (res.code == 0) {
 						this.appointData = res.data
-						for(let i=0;i<this.appointData.length;i++){
-							if(this.appointData[i].ymNumber=='第一针'){
-								this.one=true
+						for (let i = 0; i < this.appointData.length; i++) {
+							if (this.appointData[i].ymNumber == '第一针') {
+								this.one = true
 							}
-							if(this.appointData[i].ymNumber=='第二针'){
-								this.two=true
+							if (this.appointData[i].ymNumber == '第二针') {
+								this.two = true
 							}
-							if(this.appointData[i].ymNumber=='第三针（加强针）'){
-								this.three=true
+							if (this.appointData[i].ymNumber == '第三针（加强针）') {
+								this.three = true
 							}
 						}
-						console.log(this.appointData);
 					}
 				})
 			},
-			// gotoDetail(val) {
-			// 	uni.navigateTo({
-			// 		url:'./detail?type='+val
-			// 	})
-			// },
 		},
 	}
 </script>
@@ -205,7 +205,7 @@
 					color: #000000;
 				}
 
-				
+
 			}
 		}
 	}

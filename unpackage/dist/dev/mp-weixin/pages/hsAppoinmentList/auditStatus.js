@@ -188,6 +188,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
 var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
@@ -245,15 +249,13 @@ var _storage = __webpack_require__(/*! @/utils/storage.js */ 24); //
 //
 //
 //
-var _default = { name: '', data: function data() {return { hsDetail: { hsTrueDate: '' }, date: '请选择时间' };}, onLoad: function onLoad(option) {if (option) {var params = JSON.parse(option.params);this.hsDetail = params;console.log(params);}}, methods: { DateChange: function DateChange(e) {this.date = e.detail.value;this.hsDetail.hsTrueDate = e.detail.value;console.log(this.date);}, validate: function validate() {if (!this.hsDetail.hsTrueDate) {uni.showToast({ title: "请选择实际检测时间！" });return;}return true;}, submitAppoinment: function submitAppoinment() {if (!this.validate()) return;this.$cloud({ name: "changeHsStatus", data: { hsTrueDate: this.hsDetail.hsTrueDate, _id: this.hsDetail._id } }).then(function (res) {console.log(res, 'wwxxxxxxxxxxxxx');if (res.code == 0) {uni.showModal({ title: "提示", content: res.msg, showCancel: false });uni.navigateBack({
-            delta: 1 });
-
-          return;
-        }
-
-
-
-      });
+//
+//
+//
+//
+var _default = { name: '', data: function data() {return { hsDetail: { hsTrueDate: '' }, date: '请选择时间' };}, onLoad: function onLoad(option) {if (option) {var params = JSON.parse(option.params);this.hsDetail = params;console.log(params);}}, methods: { DateChange: function DateChange(e) {this.date = e.detail.value;this.hsDetail.hsTrueDate = e.detail.value;console.log(this.date);}, //表单验证
+    validate: function validate() {if (!this.hsDetail.hsTrueDate) {uni.showModal({ title: "提示", content: '请选择实际检测时间', showCancel: false });return;}return true;}, //提交申请
+    submitAppoinment: function submitAppoinment() {if (!this.validate()) return;this.$cloud({ name: "changeHsStatus", data: { hsTrueDate: this.hsDetail.hsTrueDate, _id: this.hsDetail._id } }).then(function (res) {if (res.code == 0) {uni.showModal({ title: "提示", content: res.msg, showCancel: false });uni.navigateBack({ delta: 1 });return;}});
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

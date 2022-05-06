@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description: 实名信息认证功能
+* @createTime: 2022-05-05 13:11:19
+*/
 <template>
 	<view class="login-container">
 		<view class="cu-form-group margin-top">
@@ -24,7 +29,7 @@
 			</radio-group>
 		</view>
 		<view class="cu-form-group margin-top">
-			<view class="title">日期选择:</view>
+			<view class="title">出生日期:</view>
 			<picker class="" mode="date" :value="date" start="1900-01-01" end="2022-01-01" @change="DateChange">
 				<view class="picker">
 					{{date}}
@@ -32,8 +37,8 @@
 			</picker>
 		</view>
 		<view class="cu-form-group margin-top">
-			<view class="title">地址:</view>
-			<input placeholder="请输入地址" v-model="formData.address" />
+			<view class="title">联系地址:</view>
+			<input placeholder="请输入详细地址" v-model="formData.address" />
 		</view>
 		<view class="loing_btn g-flex g-flex-center">
 			<button class="cu-btn" @click="authHandle">
@@ -42,8 +47,6 @@
 				</text>
 			</button>
 		</view>
-
-
 	</view>
 </template>
 <script>
@@ -88,7 +91,7 @@
 				console.log(this.date);
 			},
 
-			//查询实名数据
+			//查询实名数据，如果查到有数据，回填数据并可更改
 			getAuthData() {
 				this.$cloud({
 					name: "isAuth",
@@ -169,6 +172,8 @@
 				//表单验证不通过，抛出异常提示
 				if (!this.validate()) return
 				let params = JSON.parse(JSON.stringify(this.formData))
+				
+				//调用authData云函数
 				this.$cloud({
 					name: "authData",
 					data: {
@@ -180,7 +185,10 @@
 							title: "认证成功！"
 						});
 						setTimeout(() => {
-							this.formData = {}
+							//清空表单
+							for (const key in this.formData) {
+								this.formData[key] = ''
+							}
 							uni.navigateBack({
 								delta: 1
 							})
@@ -193,7 +201,6 @@
 					}
 				});
 			},
-
 
 		}
 

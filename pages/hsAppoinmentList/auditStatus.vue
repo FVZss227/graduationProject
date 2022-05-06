@@ -1,5 +1,9 @@
+/**
+ * author: Zhangys
+ * description: 管理员审核核酸预约功能
+ * @createTime: 2022-05-05 13:12:56
+ */
 <template>
-
 	<view class="container">
 		<view class="c-title">用户信息</view>
 		<view class="cu-form-group">
@@ -10,13 +14,13 @@
 			<view class="title">证件号:</view>
 			<input :value="hsDetail.idNo" disabled></input>
 		</view>
-<view class="cu-form-group">
+		<view class="cu-form-group">
 			<view class="title">手机号:</view>
 			<input :value="hsDetail.phone" disabled></input>
 		</view>
 		<view class="c-title" style="margin-top: 30upx;">核酸检测信息</view>
 		<view class="cu-form-group">
-			<view class="title">核酸名称(Vaccine):</view>
+			<view class="title">核酸检测名称(Vaccine):</view>
 			<input :value="hsDetail.hsName" disabled></input>
 		</view>
 		<view class="cu-form-group">
@@ -32,7 +36,7 @@
 			<view class="title">预约检测时间:</view>
 			<input :value="hsDetail.hsDate" disabled></input>
 		</view>
-		
+
 		<view class="c-title" style="margin-top: 30upx;">检测信息</view>
 		<view class="cu-form-group">
 			<view class="title">实际检测时间:</view>
@@ -65,18 +69,18 @@
 		data() {
 			return {
 				hsDetail: {
-					hsTrueDate:'',
+					hsTrueDate: '',
 				},
 				date: '请选择时间',
 			}
 		},
 		onLoad(option) {
 			if (option) {
-				let params=JSON.parse(option.params)
-				this.hsDetail=params
-				
+				let params = JSON.parse(option.params)
+				this.hsDetail = params
+
 				console.log(params);
-				
+
 			}
 		},
 		methods: {
@@ -85,52 +89,48 @@
 				this.hsDetail.hsTrueDate = e.detail.value
 				console.log(this.date);
 			},
-			validate(){
-				if(!this.hsDetail.hsTrueDate){
-					uni.showToast({
-						title: "请选择实际检测时间！",
+			
+			//表单验证
+			validate() {
+				if (!this.hsDetail.hsTrueDate) {
+					uni.showModal({
+						title: "提示",
+						content: '请选择实际检测时间',
+						showCancel: false,
 					});
 					return
 				}
-				
 				return true
 			},
+			//提交申请
 			submitAppoinment() {
-				if(!this.validate()) return
+				if (!this.validate()) return
 				this.$cloud({
 					name: "changeHsStatus",
 					data: {
-						hsTrueDate:this.hsDetail.hsTrueDate,
-						_id:this.hsDetail._id
+						hsTrueDate: this.hsDetail.hsTrueDate,
+						_id: this.hsDetail._id
 					}
 				}).then(res => {
-					console.log(res, 'wwxxxxxxxxxxxxx');
-					
-					if(res.code==0){
-			
+					if (res.code == 0) {
 						uni.showModal({
 							title: "提示",
 							content: res.msg,
 							showCancel: false,
 						});
 						uni.navigateBack({
-							delta:1
+							delta: 1
 						})
 						return
 					}
-				
-					
-			
 				})
 			}
 		}
 
 	}
 </script>
-
 <style lang='scss' scoped>
 	.container {
-
 		/* background-color: #ffffff; */
 		.c-title {
 			margin-top: 30upx;
@@ -145,9 +145,10 @@
 		.cu-form-group {
 			min-height: 86upx;
 		}
+
 		.loing_btn {
 			margin-top: 40rpx;
-		
+
 			.cu-btn {
 				/* border-radius: 25px; */
 				width: 600rpx;
@@ -155,7 +156,7 @@
 				color: #fff;
 				background-color: #59b58d;
 			}
-		
+
 		}
 	}
 </style>

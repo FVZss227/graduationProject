@@ -1,4 +1,8 @@
-<!-- 新办订单列表 -->
+/**
+* author: Zhangys
+* description: 疫苗预约记录列表
+* @createTime: 2022-05-05 13:20:12
+*/
 <template>
 	<view class="order-list">
 		<view class="item" v-for="(item,index) in appointData" :key="index">
@@ -8,9 +12,10 @@
 						<view class="weui-form-preview__label label_name">
 							{{item.trueName}}
 						</view>
-					<view class="auditBtn":style="item.status=='0'?'background-color:#FBC02D' : 'background-color:#26DA6F'">
-						<text>{{item.status=='0'?'未接种':'已接种'}}</text>
-					</view>
+						<view class="auditBtn"
+							:style="item.status=='0'?'background-color:#FBC02D' : 'background-color:#26DA6F'">
+							<text>{{item.status=='0'?'未接种':'已接种'}}</text>
+						</view>
 					</view>
 				</view>
 				<view class="weui-form-preview__bd">
@@ -71,19 +76,19 @@
 		data() {
 			return {
 				appointData: [],
-				isAdmin:false
-
+				isAdmin: false
 			};
 		},
 		onShow() {
-			if(getLoginUserInfo().username=='admin'){
-				this.isAdmin=true
+			if (getLoginUserInfo().username == 'admin') {
+				this.isAdmin = true
 				this.checkList()
 				return
 			}
 			this.getList()
 		},
 		methods: {
+			//获取已预约的列表数据
 			getList() {
 				this.$cloud({
 					name: "ymAppoinment",
@@ -91,37 +96,35 @@
 						openid: getOpenId().openid
 					}
 				}).then(res => {
-					console.log(res, '----------------- appointment---------------');
 					if (res.code == 0) {
 						this.appointData = res.data
 						console.log(this.appointData);
 					}
 				})
 			},
-			checkList(){
+			checkList() {
 				this.$cloud({
 					name: "auditYm",
 					data: {
-						type:'ym'
+						type: 'ym'
 					}
 				}).then(res => {
-					console.log(res, '----------------- appointm1111ent---------------');
 					if (res.code == 0) {
 						this.appointData = res.data
 						console.log(this.appointData);
 					}
 				})
 			},
-			auditStatus(val){
-				if(!this.isAdmin) return
-				if(val.status=='1'){
+			auditStatus(val) {
+				if (!this.isAdmin) return
+				if (val.status == '1') {
 					uni.showModal({
-						content:'结果已出，无法操作！'
+						content: '结果已出，无法操作！'
 					})
 					return
-				} 
+				}
 				uni.navigateTo({
-					url:'./auditStatus?params='+JSON.stringify(val)
+					url: './auditStatus?params=' + JSON.stringify(val)
 				})
 				console.log(val._id);
 			}
@@ -155,9 +158,11 @@
 			font-weight: 500;
 			text-align: left;
 		}
-		.label_name{
+
+		.label_name {
 			font-weight: bold;
 		}
+
 		.weui-form-preview__value {
 			font-style: normal;
 			font-size: 28rpx;
@@ -208,7 +213,8 @@
 	.weui-form-preview__ft {
 		padding-bottom: 10rpx;
 	}
-	.auditBtn{
+
+	.auditBtn {
 		width: 120rpx;
 		height: 40rpx;
 		border-radius: 10rpx;

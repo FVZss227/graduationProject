@@ -1,3 +1,8 @@
+/**
+* author: Zhangys
+* description: 核酸检测报告详情
+* @createTime: 2022-05-05 13:18:32
+*/
 <template>
 	<view class="detail-container">
 		<view class="content-info ">
@@ -34,7 +39,7 @@
 					</view>
 					<text class="item-text">{{detectionList.hsAddress}}</text>
 				</view>
-				
+
 				<view class="info-item g-flex g-flex-align-center">
 					<view class="item-label">
 						检测方式：
@@ -98,22 +103,21 @@
 		},
 		data() {
 			return {
-				detectionList:{}
+				detectionList: {}
 			}
 		},
 		onLoad(options) {
 			console.log(options);
-			// console.log(JSON.parse(options.params));
-			this.detectionList=JSON.parse(options.params)
+			this.detectionList = JSON.parse(options.params)
 		},
 		computed: {
-		
+
 		},
 		created() {
 
 		},
 		methods: {
-		
+
 		},
 	}
 </script>
@@ -124,22 +128,26 @@
 			background-color: #fff;
 			margin: 20rpx 20rpx;
 			border-radius: 10rpx;
+
 			.tips-text {
 				color: #eb901a;
 				margin: 0 10rpx;
 			}
+
 			.info-title {
 				font-size: 36rpx;
 				font-weight: bold;
 				position: relative;
 				top: 20rpx;
 			}
+
 			.info-detail {
 				.info-name {
 					margin: 20rpx;
 					font-size: 32rpx;
 					font-weight: bold;
 				}
+
 				.info-item {
 					margin: 16rpx;
 
@@ -147,31 +155,35 @@
 						color: #707070;
 					}
 				}
+
 				.info-item:last-child {
 					margin-bottom: 40rpx;
 				}
 			}
-			
-			.info-check{
+
+			.info-check {
 				position: relative;
 				top: 20rpx;
 				margin: 20rpx 20rpx;
 				padding-bottom: 50rpx;
 				border-bottom: 1px solid #EEEEEE;
-				
+
 			}
-			.info-check-name{
+
+			.info-check-name {
 				font-weight: bold;
 				/* margin: 10rpx 20rpx; */
 				margin: 40rpx 20rpx 10rpx 20rpx;
 			}
-			.info-check-desc{
+
+			.info-check-desc {
 				color: #7f7f7f;
 				margin: 10rpx 20rpx;
 			}
 
 		}
-		.endtips{
+
+		.endtips {
 			margin-top: 30rpx;
 			font-size: 24rpx;
 			text-align: center;
